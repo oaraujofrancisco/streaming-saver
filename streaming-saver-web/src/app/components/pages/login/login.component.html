@@ -1,0 +1,32 @@
+<div class="login-container">
+  <form [formGroup]="loginForm">
+    <mat-card class="login-card">
+      <mat-card-title class="title">Login</mat-card-title>
+
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="name@example.com" formControlName="email">
+        <mat-error *ngIf="email!.invalid && email!.touched">
+          Digite um email válido!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <mat-error *ngIf="password!.errors?.['minlength'] && password!.touched">
+          Mínimo de 8 caracteres!
+        </mat-error>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-card-actions align="end" class="buttons">
+        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+        <button mat-raised-button>Cadastre-se</button>
+      </mat-card-actions>
+
+    </mat-card>
+  </form>
+</div>
