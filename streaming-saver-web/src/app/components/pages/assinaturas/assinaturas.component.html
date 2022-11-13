@@ -1,0 +1,70 @@
+<div class="list-container">
+  <mat-card class="subscriptions">
+    <mat-card-title>Assinaturas</mat-card-title>
+    <mat-radio-group class="filter"
+    [(ngModel)]="filterModel"
+    (change)="applyFilter()">
+      <mat-radio-button value="Todas" checked="true">Todas</mat-radio-button>
+      <mat-radio-button value="Ativa">Ativa</mat-radio-button>
+      <mat-radio-button value="Inativa">Inativa</mat-radio-button>
+    </mat-radio-group>
+    <table mat-table [dataSource]="subscriptions" class="table">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+      </ng-container>
+
+      <!-- Last Access Column -->
+      <ng-container matColumnDef="last_access">
+        <th mat-header-cell *matHeaderCellDef> Ultimo Acesso </th>
+        <td mat-cell *matCellDef="let element"> {{ element.last_access }} </td>
+      </ng-container>
+
+      <!-- Watching Column -->
+      <ng-container matColumnDef="watching">
+        <th mat-header-cell *matHeaderCellDef> Assistindo </th>
+        <td mat-cell *matCellDef="let element"> {{ element.watching }} </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{ element.status }} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="padding-left: 20px;"> Ações
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button
+            matTooltip="Editar"
+            [matTooltipPosition]="'left'"
+            color="primary">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button mat-icon-button
+            matTooltip="Deletar"
+            [matTooltipPosition]="'right'"
+            color="warn">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-card-actions align="end">
+      <button mat-mini-fab
+        matTooltip="Adicionar assinatura"
+        [matTooltipPosition]="'below'"
+        color="primary" >
+        <mat-icon fontIcon="add"></mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
