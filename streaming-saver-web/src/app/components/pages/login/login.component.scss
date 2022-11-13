@@ -1,0 +1,26 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .login-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+    min-width: 300px;
+
+    .input-field {
+      width: 80%;
+    }
+  }
+
+  .buttons {
+    width: 100%;
+  }
+
+}
+
