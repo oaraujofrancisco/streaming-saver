@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { AssinaturasComponent } from './components/pages/assinaturas/assinaturas.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { MaterialModule } from './modules/material/material.module';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AssinaturasComponent
+    AssinaturasComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

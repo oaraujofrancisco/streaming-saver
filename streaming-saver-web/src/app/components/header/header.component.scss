@@ -1,0 +1,16 @@
+.toolbar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  padding: 36px;
+
+  .left-group {
+    display: flex;
+
+    .logo {
+      font-size: 1.875rem;
+    }
+  }
+}

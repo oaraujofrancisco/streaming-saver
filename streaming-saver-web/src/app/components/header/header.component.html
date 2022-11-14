@@ -1,0 +1,18 @@
+<mat-toolbar class="toolbar" color="primary">
+  <div class="left-group">
+    <button mat-button class="logo" routerLink="">$Streaming Saver</button>
+    <div *ngIf="logged">
+      <button mat-button>Gastos</button>
+      <button mat-button routerLink="assinaturas">Assinaturas</button>
+    </div>
+  </div>
+  <div class="right-group">
+    <div *ngIf="logged; else notLogged">
+      <button mat-button>Logout <mat-icon fontIcon="logout"></mat-icon></button>
+    </div>
+    <ng-template #notLogged>
+      <button mat-button routerLink="">Login <mat-icon fontIcon="login"></mat-icon></button>
+      <button mat-button>Cadastre-se</button>
+    </ng-template>
+  </div>
+</mat-toolbar>
