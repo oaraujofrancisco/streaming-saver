@@ -1,0 +1,40 @@
+{
+  "gastos": [
+    {
+      "id": 8,
+      "name": "TV Samsung",
+      "value": 1100.55,
+      "spent_type": "Lazer",
+      "payment_type": "Pix",
+      "portion": 3,
+      "type": "Variado"
+    },
+    {
+      "type": "Fixo",
+      "name": "Light",
+      "spent_type": "Moradia",
+      "payment_type": "Débito",
+      "value": 120,
+      "portion": 1,
+      "id": 9
+    },
+    {
+      "type": "Variado",
+      "name": "Burguer King",
+      "spent_type": "Alimentação",
+      "payment_type": "Pix",
+      "value": 59.9,
+      "portion": 1,
+      "id": 10
+    },
+    {
+      "id": 11,
+      "name": "Prime Video",
+      "value": 50.95,
+      "spent_type": "Assinatura",
+      "payment_type": "Débito",
+      "portion": 1,
+      "type": "Fixo"
+    }
+  ]
+}
