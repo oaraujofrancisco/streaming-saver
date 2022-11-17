@@ -10,13 +10,22 @@ import { AssinaturasComponent } from './components/pages/assinaturas/assinaturas
 import { LoginComponent } from './components/pages/login/login.component';
 import { MaterialModule } from './modules/material/material.module';
 import { HeaderComponent } from './components/header/header.component';
+import { GastosComponent } from './components/pages/gastos/gastos.component';
+import { NewGastoComponent } from './components/pages/new-gasto/new-gasto.component';
+import { EditGastoComponent } from './components/pages/edit-gasto/edit-gasto.component';
+import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AssinaturasComponent,
-    HeaderComponent
+    HeaderComponent,
+    GastosComponent,
+    NewGastoComponent,
+    EditGastoComponent,
+    GastoFormComponent,
+
   ],
   imports: [
     BrowserModule,
