@@ -1,18 +1,41 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AssinaturasComponent } from './components/pages/assinaturas/assinaturas.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { MaterialModule } from './modules/material/material.module';
+import { HeaderComponent } from './components/header/header.component';
+import { GastosComponent } from './components/pages/gastos/gastos.component';
+import { NewGastoComponent } from './components/pages/new-gasto/new-gasto.component';
+import { EditGastoComponent } from './components/pages/edit-gasto/edit-gasto.component';
+import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    AssinaturasComponent,
+    HeaderComponent,
+    GastosComponent,
+    NewGastoComponent,
+    EditGastoComponent,
+    GastoFormComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

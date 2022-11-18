@@ -1,0 +1,29 @@
+.list-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  .subscriptions {
+    width: 600px;
+    padding: 30px;
+
+    .filter {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .table {
+      width: 100%;
+
+      .mat-column-name {
+        font-weight: 500;
+      }
+
+      .mat-column-status {
+        font-style: italic;
+      }
+    }
+  }
+}
