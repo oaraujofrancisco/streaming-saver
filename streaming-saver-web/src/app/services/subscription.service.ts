@@ -8,14 +8,27 @@ import { Subscription } from '../interfaces/Subscription';
   providedIn: 'root'
 })
 export class SubscriptionService {
+  url: string = 'http://localhost:3000';
 
-  private url = 'Url';
+  constructor( private http: HttpClient ) { }
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  getSubscription(id: number): Observable<Subscription> {
+    return this.http.get<Subscription>(`${this.url}/assinaturas/${id}`);
+  }
 
   getSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(this.url);
+    return this.http.get<Subscription[]>(`${this.url}/assinaturas`);
+  }
+
+  createSubscription(data: Subscription) {
+    return this.http.post(`${this.url}/assinaturas`, data);
+  }
+
+  deleteSubscription(id: number) {
+    return this.http.delete(`${this.url}/assinaturas/${id}`);
+  }
+
+  updateSubscription(id: number, data: Subscription) {
+    return this.http.put(`${this.url}/assinaturas/${id}`, data);
   }
 }

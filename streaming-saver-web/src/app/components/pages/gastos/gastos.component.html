@@ -58,7 +58,7 @@
             matTooltip="Deletar"
             [matTooltipPosition]="'right'"
             color="warn"
-            (click)="deleteGasto(element.id)">
+            (click)="deleteGasto(element.id, element.spent_type)">
             <mat-icon fontIcon="delete"></mat-icon>
           </button>
         </td>
