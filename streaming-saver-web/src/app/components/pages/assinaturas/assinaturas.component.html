@@ -1,4 +1,44 @@
 <div class="list-container">
+  <mat-card class="search">
+    <form [formGroup]="searchForm">
+      <mat-card-title>Buscar Filme</mat-card-title>
+
+      <mat-form-field class="input-search" hintLabel="Digite o nome do Filme ou Serie" appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput #input maxlength="12" placeholder="Ex. Batman, Superman"
+               formControlName="name">
+        <mat-hint align="end"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="gasto">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="movie">Filme</mat-option>
+          <mat-option value="series">Serie</mat-option>
+        </mat-select>
+        <mat-hint align="end">Selecione o tipo(Filme ou Serie)</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" [disabled]="searchForm.invalid" (click)="procurarFilmeSerie()">Login <mat-icon fontIcon="search"></mat-icon></button>
+    </form>
+  </mat-card>
+</div>
+
+<div *ngIf="filmesSeriesEncontrados" class="list-container">
+  <mat-card class="search">
+    <mat-card-title>Filmes Encontrados</mat-card-title>
+
+    <mat-list>
+      <mat-list-item *ngFor="let filmeSerieEncontrado of filmesSeriesEncontrados.result">
+        {{filmeSerieEncontrado.title}} -
+        {{filmeSerieEncontrado.year}} -
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card>
+</div>
+
+<div class="list-container">
   <mat-card class="subscriptions">
     <mat-card-title>Assinaturas</mat-card-title>
     <mat-radio-group class="filter"

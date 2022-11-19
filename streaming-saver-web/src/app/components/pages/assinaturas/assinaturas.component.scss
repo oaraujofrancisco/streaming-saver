@@ -4,6 +4,21 @@
   justify-content: center;
   padding: 20px;
 
+  .search {
+    width: 600px;
+    padding: 30px;
+
+    .input-search {
+      width: 250px;
+      margin-right: 24px;
+    }
+
+    button {
+      margin-left: 24px;
+    }
+
+  }
+
   .subscriptions {
     width: 600px;
     padding: 30px;

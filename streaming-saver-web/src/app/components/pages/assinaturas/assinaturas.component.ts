@@ -3,6 +3,8 @@ import { SubscriptionService } from 'src/app/services/subscription.service';
 
 import { Subscription } from '../../../interfaces/Subscription';
 import { Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ApiExternaService} from "../../../services/api-externa.service";
 
 @Component({
   selector: 'app-assinaturas',
@@ -17,12 +19,26 @@ export class AssinaturasComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'last_access', 'watching', 'status', 'actions']
 
+  searchForm!: FormGroup;
+  filmesSeriesEncontrados!: any;
+
   constructor(
     private subscriptionService: SubscriptionService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private apiExternaService: ApiExternaService
+  ) { }
 
   ngOnInit(): void {
+    this.searchForm = this.formBuilder.group({
+      name: ['', [
+        Validators.required,
+      ]],
+      type: ['', [
+        Validators.required,
+      ]]
+    })
+
     this.subscriptionService.getSubscriptions()
       .subscribe(items => {
         this.subscriptions = items;
@@ -47,4 +63,17 @@ export class AssinaturasComponent implements OnInit {
     { queryParams: { data:this.gastoType } })
   }
 
+  procurarFilmeSerie() {
+
+    if(this.searchForm.valid) {
+      const name = this.searchForm.value?.name;
+      const type = this.searchForm.value?.type;
+
+      this.apiExternaService.getFilme(name, type).subscribe(valorRetornado => {
+        this.filmesSeriesEncontrados = valorRetornado;
+
+        console.log(this.filmesSeriesEncontrados);
+      })
+    }
+  }
 }

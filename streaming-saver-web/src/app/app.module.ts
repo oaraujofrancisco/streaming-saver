@@ -27,16 +27,16 @@ import { GastoFormComponent } from './components/gasto-form/gasto-form.component
     GastoFormComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    HttpClientModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        HttpClientModule,
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

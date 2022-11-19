@@ -1,7 +1,8 @@
 import { SubscriptionService } from 'src/app/services/subscription.service';
-import { GastoService } from './../../../services/gasto.service';
+import { GastoService } from '../../../services/gasto.service';
 import { Component, OnInit } from '@angular/core';
 import { Gasto } from 'src/app/interfaces/Gasto';
+import {ApiExternaService} from "../../../services/api-externa.service";
 
 @Component({
   selector: 'app-gastos',
@@ -24,11 +25,16 @@ export class GastosComponent implements OnInit {
 
   constructor(
     private gastoService: GastoService,
-    private subsService: SubscriptionService
+    private subsService: SubscriptionService,
+    private apiExternaService: ApiExternaService
     ) { }
 
   ngOnInit(): void {
     this.getGastos();
+    this.apiExternaService.getFilme('batman', 'movie').subscribe(valor => {
+      console.log(valor);
+      }
+    )
 
   }
 
