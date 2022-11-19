@@ -26,15 +26,36 @@
       "value": 59.9,
       "portion": 1,
       "id": 10
-    },
+    }
+  ],
+  "assinaturas": [
     {
-      "id": 11,
-      "name": "Prime Video",
-      "value": 50.95,
+      "id": 1,
+      "name": "Netflix",
+      "value": 59.9,
       "spent_type": "Assinatura",
       "payment_type": "Débito",
       "portion": 1,
-      "type": "Fixo"
+      "type": "Fixo",
+      "activated": "Ativa",
+      "series": [],
+      "movies": [],
+      "lastAccess": "18/11/2022",
+      "lastUpdate": "18/11/2022"
+    },
+    {
+      "id": 2,
+      "name": "Prime Video",
+      "value": 27.99,
+      "spent_type": "Assinatura",
+      "payment_type": "Crédito",
+      "portion": 1,
+      "type": "Fixo",
+      "activated": "Ativa",
+      "series": [],
+      "movies": [],
+      "lastAccess": "18/11/2022",
+      "lastUpdate": "18/11/2022"
     }
   ]
 }

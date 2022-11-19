@@ -37,7 +37,7 @@ export class AssinaturasComponent implements OnInit {
       this.subscriptions = this.allSubscriptions;
     } else {
       this.subscriptions = this.allSubscriptions.filter(subscription => {
-        return subscription.activated.includes(option);
+        return subscription.activated!.includes(option);
       });
     }
   }
