@@ -1,7 +1,10 @@
-import { GastoService } from './../../../services/gasto.service';
 import { Component, OnInit } from '@angular/core';
-import { Gasto } from 'src/app/interfaces/Gasto';
 import { Router } from '@angular/router';
+import { Gasto } from 'src/app/interfaces/Gasto';
+import { SubscriptionService } from 'src/app/services/subscription.service';
+
+import { Subscription } from './../../../interfaces/Subscription';
+import { GastoService } from './../../../services/gasto.service';
 
 @Component({
   selector: 'app-new-gasto',
@@ -14,17 +17,31 @@ export class NewGastoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private gastoService: GastoService
+    private gastoService: GastoService,
+    private subsService: SubscriptionService
   ) { }
 
   ngOnInit(): void {
   }
 
   async createHandler(gasto: Gasto) {
-    await this.gastoService.createGasto(gasto).subscribe(() => {
-      this.router.navigate(['gastos']);
-    });
+    if (gasto.spent_type === 'Assinatura') {
+      const subs: Subscription = gasto;
+      const data = new Date().toLocaleDateString('pt-BR');
+      subs.activated = 'Ativa';
+      subs.series = [];
+      subs.movies = [];
+      subs.lastAccess = data;
+      subs.lastUpdate = data;
 
-
+      this.subsService.createSubscription(subs).subscribe(() => {
+        this.router.navigate(['gastos']);
+      })
+      
+    } else {
+      this.gastoService.createGasto(gasto).subscribe(() => {
+        this.router.navigate(['gastos']);
+      });
+    }
   }
 }

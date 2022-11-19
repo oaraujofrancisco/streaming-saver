@@ -1,3 +1,4 @@
+import { SubscriptionService } from 'src/app/services/subscription.service';
 import { GastoService } from './../../../services/gasto.service';
 import { Component, OnInit } from '@angular/core';
 import { Gasto } from 'src/app/interfaces/Gasto';
@@ -21,7 +22,10 @@ export class GastosComponent implements OnInit {
 
   allSpending: Gasto[] = [];
 
-  constructor( private gastoService: GastoService) { }
+  constructor(
+    private gastoService: GastoService,
+    private subsService: SubscriptionService
+    ) { }
 
   ngOnInit(): void {
     this.getGastos();
@@ -50,20 +54,32 @@ export class GastosComponent implements OnInit {
     });
   }
 
-  getGastos() {
-    this.gastoService.getGastos().subscribe(gastos => {
-      gastos.map(item => {
-        item.portion_value = item.value/item.portion;
-      })
+  async getGastos() {
+    let allGastos: Gasto[];
+    await this.gastoService.getGastos().subscribe(gastos => {
+      allGastos = gastos;
 
-      this.allSpending = gastos;
-      this.spending = gastos;
-      this.calcTotal();
+      this.subsService.getSubscriptions().subscribe(subs => {
+        allGastos.push.apply(allGastos, subs);
+
+        allGastos.map(item => {
+          item.portion_value = item.value/item.portion;
+        });
+
+        this.allSpending = allGastos;
+        this.spending = allGastos;
+        this.calcTotal();
+      })
     })
   }
 
-  deleteGasto(id: number) {
-    this.gastoService.deleteGasto(id).subscribe();
+  deleteGasto(id: number, type: string) {
+    if (type === 'Assinatura') {
+      this.subsService.deleteSubscription(id).subscribe();
+    } else {
+      this.gastoService.deleteGasto(id).subscribe();
+    }
+
     this.allSpending = this.allSpending.filter(item => {
       return item.id !== id;
     });
