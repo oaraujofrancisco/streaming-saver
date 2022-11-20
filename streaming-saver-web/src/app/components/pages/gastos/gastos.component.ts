@@ -1,8 +1,10 @@
-import { SubscriptionService } from 'src/app/services/subscription.service';
-import { GastoService } from '../../../services/gasto.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Gasto } from 'src/app/interfaces/Gasto';
-import {ApiExternaService} from "../../../services/api-externa.service";
+import { SubscriptionService } from 'src/app/services/subscription.service';
+
+import { ApiExternaService } from '../../../services/api-externa.service';
+import { GastoService } from '../../../services/gasto.service';
 
 @Component({
   selector: 'app-gastos',
@@ -26,16 +28,11 @@ export class GastosComponent implements OnInit {
   constructor(
     private gastoService: GastoService,
     private subsService: SubscriptionService,
-    private apiExternaService: ApiExternaService
+    private router: Router
     ) { }
 
   ngOnInit(): void {
     this.getGastos();
-    this.apiExternaService.getFilme('batman', 'movie').subscribe(valor => {
-      console.log(valor);
-      }
-    )
-
   }
 
   applyFilter() {
@@ -93,6 +90,14 @@ export class GastosComponent implements OnInit {
       return item.id !== id;
     });
     this.calcTotal();
+  }
+
+  toEdit(id: number, type: string) {
+    if (type === 'Assinatura') {
+      this.router.navigate([`assinaturas/edit/${id}`]);
+    } else {
+      this.router.navigate([`gastos/edit/${id}`]);
+    }
   }
 
 }

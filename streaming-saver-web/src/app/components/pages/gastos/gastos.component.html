@@ -51,7 +51,7 @@
             matTooltip="Editar"
             [matTooltipPosition]="'left'"
             color="primary"
-            routerLink="edit/{{ element.id }}">
+            (click)="toEdit(element.id, element.spent_type)">
             <mat-icon fontIcon="edit"></mat-icon>
           </button>
           <button mat-icon-button

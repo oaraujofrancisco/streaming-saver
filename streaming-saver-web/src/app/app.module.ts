@@ -14,6 +14,8 @@ import { GastosComponent } from './components/pages/gastos/gastos.component';
 import { NewGastoComponent } from './components/pages/new-gasto/new-gasto.component';
 import { EditGastoComponent } from './components/pages/edit-gasto/edit-gasto.component';
 import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
+import { AssinaturaFormComponent } from './components/assinatura-form/assinatura-form.component';
+import { EditAssinaturaComponent } from './components/pages/edit-assinatura/edit-assinatura.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { GastoFormComponent } from './components/gasto-form/gasto-form.component
     NewGastoComponent,
     EditGastoComponent,
     GastoFormComponent,
+    AssinaturaFormComponent,
+    EditAssinaturaComponent,
 
   ],
     imports: [
