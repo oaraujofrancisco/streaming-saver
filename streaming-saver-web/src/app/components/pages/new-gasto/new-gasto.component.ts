@@ -27,17 +27,17 @@ export class NewGastoComponent implements OnInit {
   async createHandler(gasto: Gasto) {
     if (gasto.spent_type === 'Assinatura') {
       const subs: Subscription = gasto;
-      const data = new Date().toLocaleDateString('pt-BR');
+      const date = new Date().toLocaleDateString('pt-BR');
       subs.activated = 'Ativa';
       subs.series = [];
       subs.movies = [];
-      subs.lastAccess = data;
-      subs.lastUpdate = data;
+      subs.lastAccess = date;
+      subs.lastUpdate = date;
 
       this.subsService.createSubscription(subs).subscribe(() => {
-        this.router.navigate(['gastos']);
+        this.router.navigate(['assinaturas']);
       })
-      
+
     } else {
       this.gastoService.createGasto(gasto).subscribe(() => {
         this.router.navigate(['gastos']);

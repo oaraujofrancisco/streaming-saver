@@ -1,18 +1,18 @@
+import { Subscription } from './../../interfaces/Subscription';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Gasto } from 'src/app/interfaces/Gasto';
 
+
 @Component({
-  selector: 'app-gasto-form',
-  templateUrl: './gasto-form.component.html',
-  styleUrls: ['./gasto-form.component.scss']
+  selector: 'app-assinatura-form',
+  templateUrl: './assinatura-form.component.html',
+  styleUrls: ['./assinatura-form.component.scss']
 })
-export class GastoFormComponent implements OnInit {
+export class AssinaturaFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<Gasto>();
-  @Input() fontIcon!: string;
-  @Input() matTitle!: string;
-  @Input() gastoData: Gasto | null = null;
+  @Input() subsData: Subscription | null = null;
 
   gasto: string = 'Fixo';
   gastoForm!: FormGroup;
@@ -31,25 +31,29 @@ export class GastoFormComponent implements OnInit {
     });
 
     this.gastoForm = this.formBuilder.group({
-      id: [this.gastoData ? this.gastoData.id : '', [
+
+      id: [this.subsData ? this.subsData.id : '', [
 
       ]],
-      name: [this.gastoData ? this.gastoData.name : '', [
+      name: [this.subsData ? this.subsData.name : '', [
         Validators.required
       ]],
-      value: [this.gastoData ? this.gastoData.value : '' , [
+      value: [this.subsData ? this.subsData.value : '' , [
         Validators.required
       ]],
-      spent_type: [this.gastoData ? this.gastoData.spent_type : this.subscription, [
+      spent_type: [this.subsData ? this.subsData.spent_type : this.subscription, [
         Validators.required
       ]],
-      payment_type: [this.gastoData ? this.gastoData.payment_type : '', [
+      payment_type: [this.subsData ? this.subsData.payment_type : '', [
         Validators.required
       ]],
-      portion: [this.gastoData ? this.gastoData.portion : 1 , [
+      portion: [this.subsData ? this.subsData.portion : 1 , [
         Validators.required
       ]],
-      type: [this.gastoData ? this.gastoData.type : this.gasto, [
+      type: [this.subsData ? this.subsData.type : this.gasto, [
+        Validators.required
+      ]],
+      activated: [this.subsData ? this.subsData.activated : '', [
         Validators.required
       ]]
     });
@@ -83,16 +87,20 @@ export class GastoFormComponent implements OnInit {
     return this.gastoForm.get('type');
   }
 
+  get activated() {
+    return this.gastoForm.get('activated');
+  }
+
   applyFilter(event: any) {
     this.gasto = event.value;
-    console.log(this.gastoData);
+    console.log(this.subsData);
   }
 
   submit() {
     if (this.gastoForm.invalid) {
       return;
     }
-
+    console.log(this.gastoForm.value);
     this.onSubmit.emit(this.gastoForm.value);
   }
 }
