@@ -24,6 +24,8 @@ export class AssinaturasComponent implements OnInit {
   searchForm!: FormGroup;
   filmesSeriesEncontrados!: any;
 
+  usuarioId!: string;
+
   constructor(
     private subscriptionService: StreamingService,
     private router: Router,
@@ -33,6 +35,14 @@ export class AssinaturasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('usuarioId')) {
+      localStorage.removeItem('usuarioId');
+      this.router.navigate(['login']);
+    } else {
+      // @ts-ignore
+      this.usuarioId = localStorage.getItem('usuarioId');
+    }
+
     this.searchForm = this.formBuilder.group({
       name: ['', [
         Validators.required,
@@ -42,7 +52,7 @@ export class AssinaturasComponent implements OnInit {
       ]]
     })
 
-    this.subscriptionService.getSubscriptions()
+    this.subscriptionService.getStreamings(this.usuarioId)
       .subscribe(items => {
         this.subscriptions = items;
         this.allSubscriptions = items;
@@ -99,7 +109,7 @@ export class AssinaturasComponent implements OnInit {
       let data: Streaming;
       const serieOrMovie: SerieOuFilme = {};
 
-      this.subscriptionService.getSubscription(id)
+      this.subscriptionService.getStreaming(id)
         .subscribe(item => {
           const date = new Date().toLocaleDateString('pt-BR');
           data = item;
@@ -113,7 +123,7 @@ export class AssinaturasComponent implements OnInit {
           } else {
             data.filmes?.unshift(serieOrMovie);
           }
-          this.subscriptionService.updateSubscription(id, data).subscribe(() => {
+          this.subscriptionService.updateAssinatura(id, data).subscribe(() => {
             console.log('Success');
           });
         });
@@ -124,7 +134,7 @@ export class AssinaturasComponent implements OnInit {
   }
 
   deleteAssinatura(id: number) {
-    this.subsService.deleteSubscription(id).subscribe();
+    this.subsService.deleteStreaming(id).subscribe();
 
     this.allSubscriptions = this.allSubscriptions.filter(item => {
       return item.id !== id;

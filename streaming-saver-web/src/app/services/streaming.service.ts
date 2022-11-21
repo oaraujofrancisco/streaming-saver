@@ -13,23 +13,28 @@ export class StreamingService {
 
   constructor( private http: HttpClient ) { }
 
-  getSubscription(id: number): Observable<Streaming> {
+  getStreaming(id: number): Observable<Streaming> {
     return this.http.get<Streaming>(`${this.urlApi}/assinaturas/${id}`);
   }
 
-  getSubscriptions(): Observable<Streaming[]> {
-    return this.http.get<Streaming[]>(`${this.urlApi}/assinaturas`);
+  getStreamings(usuarioId: string): Observable<Streaming[]> {
+
+    const params = {
+      'usuario-id': usuarioId
+    }
+
+    return this.http.get<Streaming[]>(`${this.urlApi}/assinaturas`, {params});
   }
 
-  createSubscription(data: Streaming) {
+  createStreaming(data: Streaming) {
     return this.http.post(`${this.urlApi}/assinaturas`, [data]);
   }
 
-  deleteSubscription(id: number) {
+  deleteStreaming(id: number) {
     return this.http.delete(`${this.urlApi}/assinaturas/${id}`);
   }
 
-  updateSubscription(id: number, data: Streaming) {
+  updateAssinatura(id: number, data: Streaming) {
     return this.http.put(`${this.urlApi}/assinaturas/${id}`, data);
   }
 }

@@ -34,7 +34,7 @@ export class NewGastoComponent implements OnInit {
       subs.ultimoAcesso = date;
       subs.ultimaAtualizacao = date;
 
-      this.subsService.createSubscription(subs).subscribe(() => {
+      this.subsService.createStreaming(subs).subscribe(() => {
         this.router.navigate(['assinaturas']);
       })
 

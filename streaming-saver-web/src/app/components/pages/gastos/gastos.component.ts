@@ -24,6 +24,8 @@ export class GastosComponent implements OnInit {
 
   allSpending: Gasto[] = [];
 
+  usuarioId!: string;
+
   constructor(
     private gastoService: GastoService,
     private subsService: StreamingService,
@@ -31,6 +33,14 @@ export class GastosComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('usuarioId')) {
+      localStorage.removeItem('usuarioId');
+      this.router.navigate(['login']);
+    } else {
+      // @ts-ignore
+      this.usuarioId = localStorage.getItem('usuarioId');
+    }
+
     this.getGastos();
   }
 
@@ -56,12 +66,12 @@ export class GastosComponent implements OnInit {
     });
   }
 
-  async getGastos() {
+   getGastos() {
     let allGastos: Gasto[];
-    await this.gastoService.getGastos().subscribe(gastos => {
+    this.gastoService.getGastos(this.usuarioId).subscribe(gastos => {
       allGastos = gastos;
 
-      this.subsService.getSubscriptions().subscribe(subs => {
+      this.subsService.getStreamings(this.usuarioId).subscribe(subs => {
         allGastos.push.apply(allGastos, subs);
 
         allGastos.map(item => {
@@ -77,7 +87,7 @@ export class GastosComponent implements OnInit {
 
   deleteGasto(id: number, type: string) {
     if (type === 'Assinatura') {
-      this.subsService.deleteSubscription(id).subscribe();
+      this.subsService.deleteStreaming(id).subscribe();
     } else {
       this.gastoService.deleteGasto(id).subscribe();
     }

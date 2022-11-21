@@ -10,8 +10,6 @@ export class UsuarioService {
 
   private readonly urlApi = "api";
 
-  isLogado: boolean = false;
-
   constructor( private http: HttpClient ) { }
 
   getUser(usuarioLogin: Usuario): Observable<Usuario> {
@@ -32,11 +30,5 @@ export class UsuarioService {
     }
 
     return this.http.post<Usuario>(`${this.urlApi}/usuario`, usuarioSalvar);
-  }
-
-  validarUsuarioLogado(isLogado: boolean) {
-    this.isLogado = isLogado;
-
-    return this.isLogado;
   }
 }
