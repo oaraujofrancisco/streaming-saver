@@ -21,7 +21,7 @@ public class GastoController {
 
     @GetMapping
     public ResponseEntity<List<Gasto>> buscarTodos(
-            @RequestParam(value = "usuarioId", defaultValue = "0") Long usuarioId
+            @RequestParam(value = "usuario-id", defaultValue = "0") Long usuarioId
     ) {
         return ResponseEntity.ok(gastoService.buscarTodos(usuarioId));
     }

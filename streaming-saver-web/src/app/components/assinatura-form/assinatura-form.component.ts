@@ -17,8 +17,7 @@ export class AssinaturaFormComponent implements OnInit {
   gasto: string = 'Fixo';
   gastoForm!: FormGroup;
   subscription!: string;
-  categories: string[] =
-  [ 'Moradia', 'Assinatura', 'Alimentação', 'Lazer', 'Outros'];
+  categories: string[] = [ 'Moradia', 'Assinatura', 'Alimentação', 'Lazer', 'Outros'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,25 +34,25 @@ export class AssinaturaFormComponent implements OnInit {
       id: [this.subsData ? this.subsData.id : '', [
 
       ]],
-      name: [this.subsData ? this.subsData.nome : '', [
+      nome: [this.subsData ? this.subsData.nome : '', [
         Validators.required
       ]],
-      value: [this.subsData ? this.subsData.valor : '' , [
+      valor: [this.subsData ? this.subsData.valor : '' , [
         Validators.required
       ]],
-      spent_type: [this.subsData ? this.subsData.formaPagamento : this.subscription, [
+      formaPagamento: [this.subsData ? this.subsData.formaPagamento : this.subscription, [
         Validators.required
       ]],
-      payment_type: [this.subsData ? this.subsData.tipoGasto : '', [
+      tipoGasto: [this.subsData ? this.subsData.tipoGasto : '', [
         Validators.required
       ]],
-      portion: [this.subsData ? this.subsData.parcelaAtual : 1 , [
+      parcelaAtual: [this.subsData ? this.subsData.parcelaAtual : 1 , [
         Validators.required
       ]],
-      type: [this.subsData ? this.subsData.type : this.gasto, [
+      tipo: [this.subsData ? this.subsData.tipo : this.gasto, [
         Validators.required
       ]],
-      activated: [this.subsData ? this.subsData.ativado : '', [
+      ativado: [this.subsData ? this.subsData.ativado : '', [
         Validators.required
       ]]
     });
@@ -63,44 +62,42 @@ export class AssinaturaFormComponent implements OnInit {
     return this.gastoForm.get('id');
   }
 
-  get name() {
-    return this.gastoForm.get('name');
+  get nome() {
+    return this.gastoForm.get('nome');
   }
 
-  get value() {
-    return this.gastoForm.get('value');
+  get valor() {
+    return this.gastoForm.get('valor');
   }
 
-  get spent_type() {
-    return this.gastoForm.get('spent_type');
+  get formaPagamento() {
+    return this.gastoForm.get('formaPagamento');
   }
 
-  get payment_type() {
-    return this.gastoForm.get('payment_type');
+  get tipoGasto() {
+    return this.gastoForm.get('tipoGasto');
   }
 
-  get portion() {
-    return this.gastoForm.get('portion');
+  get parcelasTotal() {
+    return this.gastoForm.get('parcelasTotal');
   }
 
-  get type() {
-    return this.gastoForm.get('type');
+  get tipo() {
+    return this.gastoForm.get('tipo');
   }
 
-  get activated() {
-    return this.gastoForm.get('activated');
+  get ativado() {
+    return this.gastoForm.get('ativado');
   }
 
   applyFilter(event: any) {
     this.gasto = event.value;
-    console.log(this.subsData);
   }
 
   submit() {
     if (this.gastoForm.invalid) {
       return;
     }
-    console.log(this.gastoForm.value);
     this.onSubmit.emit(this.gastoForm.value);
   }
 }

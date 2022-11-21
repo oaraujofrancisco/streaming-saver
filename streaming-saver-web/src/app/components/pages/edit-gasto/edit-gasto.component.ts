@@ -28,7 +28,6 @@ export class EditGastoComponent implements OnInit {
   }
 
   editHandler(event: any) {
-    console.log(event);
     this.gastoService.updateGasto(event.id, event).subscribe(() => {
       this.router.navigate(['gastos']);
     })

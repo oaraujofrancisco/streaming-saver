@@ -51,7 +51,7 @@ export class GastosComponent implements OnInit {
       this.spending = this.allSpending;
     } else {
       this.spending = this.allSpending.filter(spending => {
-        return spending.type.includes(option);
+        return spending.tipo.includes(option);
       });
     }
 
@@ -62,7 +62,11 @@ export class GastosComponent implements OnInit {
     this.gastoTotal = 0;
 
     this.spending.forEach(item => {
-      this.gastoTotal += item.valor/item.parcelaAtual;
+      if(!item.valorParcela) {
+        this.gastoTotal += item.valor;
+      } else {
+        this.gastoTotal += item.valorParcela
+      }
     });
   }
 
@@ -73,10 +77,6 @@ export class GastosComponent implements OnInit {
 
       this.subsService.getStreamings(this.usuarioId).subscribe(subs => {
         allGastos.push.apply(allGastos, subs);
-
-        allGastos.map(item => {
-          item.portion_value = item.valor/item.parcelaAtual;
-        });
 
         this.allSpending = allGastos;
         this.spending = allGastos;

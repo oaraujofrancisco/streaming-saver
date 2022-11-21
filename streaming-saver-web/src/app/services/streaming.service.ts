@@ -27,6 +27,7 @@ export class StreamingService {
   }
 
   createStreaming(data: Streaming) {
+
     return this.http.post(`${this.urlApi}/assinaturas`, [data]);
   }
 

@@ -34,22 +34,25 @@ export class GastoFormComponent implements OnInit {
       id: [this.gastoData ? this.gastoData.id : '', [
 
       ]],
-      name: [this.gastoData ? this.gastoData.nome : '', [
+      nome: [this.gastoData ? this.gastoData.nome : '', [
         Validators.required
       ]],
-      value: [this.gastoData ? this.gastoData.valor : '' , [
+      valor: [this.gastoData ? this.gastoData.valor : '' , [
         Validators.required
       ]],
-      spent_type: [this.gastoData ? this.gastoData.formaPagamento : this.subscription, [
+      formaPagamento: [this.gastoData ? this.gastoData.formaPagamento : this.subscription, [
         Validators.required
       ]],
-      payment_type: [this.gastoData ? this.gastoData.tipoGasto : '', [
+      tipoGasto: [this.gastoData ? this.gastoData.tipoGasto : '', [
         Validators.required
       ]],
-      portion: [this.gastoData ? this.gastoData.parcelaAtual : 1 , [
+      parcelaAtual: [this.gastoData ? this.gastoData.parcelaAtual : 1 , [
         Validators.required
       ]],
-      type: [this.gastoData ? this.gastoData.type : this.gasto, [
+      parcelasTotal: [this.gastoData ? this.gastoData.parcelasTotal : 1 , [
+        Validators.required
+      ]],
+      tipo: [this.gastoData ? this.gastoData.tipo : this.gasto, [
         Validators.required
       ]]
     });
@@ -59,33 +62,32 @@ export class GastoFormComponent implements OnInit {
     return this.gastoForm.get('id');
   }
 
-  get name() {
-    return this.gastoForm.get('name');
+  get nome() {
+    return this.gastoForm.get('nome');
   }
 
-  get value() {
-    return this.gastoForm.get('value');
+  get valor() {
+    return this.gastoForm.get('valor');
   }
 
-  get spent_type() {
-    return this.gastoForm.get('spent_type');
+  get formaPagamento() {
+    return this.gastoForm.get('formaPagamento');
   }
 
-  get payment_type() {
-    return this.gastoForm.get('payment_type');
+  get tipoGasto() {
+    return this.gastoForm.get('tipoGasto');
   }
 
-  get portion() {
-    return this.gastoForm.get('portion');
+  get parcelasTotal() {
+    return this.gastoForm.get('parcelasTotal');
   }
 
-  get type() {
-    return this.gastoForm.get('type');
+  get tipo() {
+    return this.gastoForm.get('tipo');
   }
 
   applyFilter(event: any) {
     this.gasto = event.value;
-    console.log(this.gastoData);
   }
 
   submit() {

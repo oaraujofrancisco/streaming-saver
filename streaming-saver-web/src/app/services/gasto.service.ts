@@ -28,6 +28,7 @@ export class GastoService {
   }
 
   createGasto(data: Gasto) {
+
     return this.http.post(`${this.urlApi}/gastos`, data);
   }
 

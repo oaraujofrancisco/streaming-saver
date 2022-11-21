@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GastoRepository extends JpaRepository<Gasto, Long> {
 
-    List<Gasto> findByUsuariobyId(Long id);
+    List<Gasto> findByUsuario_Id(Long id);
 }
