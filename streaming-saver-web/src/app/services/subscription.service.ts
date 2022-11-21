@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Subscription } from '../interfaces/Subscription';
+import { Assinatura } from '../interfaces/assinatura';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,15 @@ export class SubscriptionService {
 
   constructor( private http: HttpClient ) { }
 
-  getSubscription(id: number): Observable<Subscription> {
-    return this.http.get<Subscription>(`${this.url}/assinaturas/${id}`);
+  getSubscription(id: number): Observable<Assinatura> {
+    return this.http.get<Assinatura>(`${this.url}/assinaturas/${id}`);
   }
 
-  getSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(`${this.url}/assinaturas`);
+  getSubscriptions(): Observable<Assinatura[]> {
+    return this.http.get<Assinatura[]>(`${this.url}/assinaturas`);
   }
 
-  createSubscription(data: Subscription) {
+  createSubscription(data: Assinatura) {
     return this.http.post(`${this.url}/assinaturas`, data);
   }
 
@@ -28,7 +28,7 @@ export class SubscriptionService {
     return this.http.delete(`${this.url}/assinaturas/${id}`);
   }
 
-  updateSubscription(id: number, data: Subscription) {
+  updateSubscription(id: number, data: Assinatura) {
     return this.http.put(`${this.url}/assinaturas/${id}`, data);
   }
 }

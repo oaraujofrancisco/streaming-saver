@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import {User} from "../../../interfaces/User";
+import {Usuario} from "../../../interfaces/usuario";
 import {UserService} from "../../../services/user.service";
 
 @Component({
@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
   validarLogin() {
     if(this.loginForm.valid){
 
-      const usuarioLogin: User = {
-        name: "",
-        password: this.loginForm.value.password,
+      const usuarioLogin: Usuario = {
+        nome: "",
+        senha: this.loginForm.value.password,
         email: this.loginForm.value.email,
       }
 
@@ -61,9 +61,9 @@ export class LoginComponent implements OnInit {
 
   createLogin () {
       if(this.loginForm.valid) {
-        const usuarioLogin: User = {
-          name: "",
-          password: this.loginForm.value.password,
+        const usuarioLogin: Usuario = {
+          nome: "",
+          senha: this.loginForm.value.password,
           email: this.loginForm.value.email,
         }
 
