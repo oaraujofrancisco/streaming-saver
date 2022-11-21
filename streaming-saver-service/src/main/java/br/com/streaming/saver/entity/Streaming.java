@@ -1,11 +1,11 @@
 package br.com.streaming.saver.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_streaming")
 public class Streaming extends Gasto {
 
     private LocalDate ultimoAcesso;

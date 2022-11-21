@@ -5,10 +5,11 @@ services:
         container_name: mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: StreamingSaver
         ports:
             - "3306:3306"
         volumes:
-            - curso-jdbc:/var/lib/mysql
+            - streaming-saver:/var/lib/mysql
 
 volumes:
-    curso-jdbc:
+    streaming-saver:
