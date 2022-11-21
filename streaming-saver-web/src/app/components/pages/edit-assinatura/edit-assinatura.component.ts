@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionService } from 'src/app/services/subscription.service';
-import { SerieOrMovie } from 'src/app/interfaces/SerieOrMovie';
 
-import { Subscription } from './../../../interfaces/Subscription';
+import { Assinatura } from '../../../interfaces/assinatura';
 
 @Component({
   selector: 'app-edit-assinatura',
@@ -11,7 +10,7 @@ import { Subscription } from './../../../interfaces/Subscription';
   styleUrls: ['./edit-assinatura.component.scss']
 })
 export class EditAssinaturaComponent implements OnInit {
-  assinatura!: Subscription;
+  assinatura!: Assinatura;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -31,7 +30,7 @@ export class EditAssinaturaComponent implements OnInit {
     subs.lastAccess = data;
     subs.lastUpdate = data;
     subs.series = this.assinatura.series;
-    subs.movies = this.assinatura.movies;
+    subs.movies = this.assinatura.filmes;
 
     this.subsService.updateSubscription(subs.id, subs).subscribe(() => {
       this.router.navigate(['assinaturas']);

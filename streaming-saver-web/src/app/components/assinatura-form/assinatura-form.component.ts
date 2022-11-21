@@ -1,8 +1,8 @@
-import { Subscription } from './../../interfaces/Subscription';
+import { Assinatura } from '../../interfaces/assinatura';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Gasto } from 'src/app/interfaces/Gasto';
+import { Gasto } from 'src/app/interfaces/gasto';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { Gasto } from 'src/app/interfaces/Gasto';
 })
 export class AssinaturaFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<Gasto>();
-  @Input() subsData: Subscription | null = null;
+  @Input() subsData: Assinatura | null = null;
 
   gasto: string = 'Fixo';
   gastoForm!: FormGroup;
@@ -35,25 +35,25 @@ export class AssinaturaFormComponent implements OnInit {
       id: [this.subsData ? this.subsData.id : '', [
 
       ]],
-      name: [this.subsData ? this.subsData.name : '', [
+      name: [this.subsData ? this.subsData.nome : '', [
         Validators.required
       ]],
-      value: [this.subsData ? this.subsData.value : '' , [
+      value: [this.subsData ? this.subsData.valor : '' , [
         Validators.required
       ]],
-      spent_type: [this.subsData ? this.subsData.spent_type : this.subscription, [
+      spent_type: [this.subsData ? this.subsData.formaPagamento : this.subscription, [
         Validators.required
       ]],
-      payment_type: [this.subsData ? this.subsData.payment_type : '', [
+      payment_type: [this.subsData ? this.subsData.tipoGasto : '', [
         Validators.required
       ]],
-      portion: [this.subsData ? this.subsData.portion : 1 , [
+      portion: [this.subsData ? this.subsData.parcelaAtual : 1 , [
         Validators.required
       ]],
       type: [this.subsData ? this.subsData.type : this.gasto, [
         Validators.required
       ]],
-      activated: [this.subsData ? this.subsData.activated : '', [
+      activated: [this.subsData ? this.subsData.ativado : '', [
         Validators.required
       ]]
     });

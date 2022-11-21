@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Gasto } from '../interfaces/Gasto';
+import { Gasto } from '../interfaces/gasto';
 
 @Injectable({
   providedIn: 'root'

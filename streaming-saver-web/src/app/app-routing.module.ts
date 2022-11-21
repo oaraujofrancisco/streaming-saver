@@ -9,7 +9,6 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { NewGastoComponent } from './components/pages/new-gasto/new-gasto.component';
 import { LoginGuard } from "./core/guard/login.guard";
 
-
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },

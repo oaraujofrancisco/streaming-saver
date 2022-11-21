@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Gasto } from 'src/app/interfaces/Gasto';
+import { Gasto } from 'src/app/interfaces/gasto';
 
 @Component({
   selector: 'app-gasto-form',
@@ -34,19 +34,19 @@ export class GastoFormComponent implements OnInit {
       id: [this.gastoData ? this.gastoData.id : '', [
 
       ]],
-      name: [this.gastoData ? this.gastoData.name : '', [
+      name: [this.gastoData ? this.gastoData.nome : '', [
         Validators.required
       ]],
-      value: [this.gastoData ? this.gastoData.value : '' , [
+      value: [this.gastoData ? this.gastoData.valor : '' , [
         Validators.required
       ]],
-      spent_type: [this.gastoData ? this.gastoData.spent_type : this.subscription, [
+      spent_type: [this.gastoData ? this.gastoData.formaPagamento : this.subscription, [
         Validators.required
       ]],
-      payment_type: [this.gastoData ? this.gastoData.payment_type : '', [
+      payment_type: [this.gastoData ? this.gastoData.tipoGasto : '', [
         Validators.required
       ]],
-      portion: [this.gastoData ? this.gastoData.portion : 1 , [
+      portion: [this.gastoData ? this.gastoData.parcelaAtual : 1 , [
         Validators.required
       ]],
       type: [this.gastoData ? this.gastoData.type : this.gasto, [

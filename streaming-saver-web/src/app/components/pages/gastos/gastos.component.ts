@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Gasto } from 'src/app/interfaces/Gasto';
+import { Gasto } from 'src/app/interfaces/gasto';
 import { SubscriptionService } from 'src/app/services/subscription.service';
 
-import { ApiExternaService } from '../../../services/api-externa.service';
 import { GastoService } from '../../../services/gasto.service';
 
 @Component({
@@ -53,7 +52,7 @@ export class GastosComponent implements OnInit {
     this.gastoTotal = 0;
 
     this.spending.forEach(item => {
-      this.gastoTotal += item.value/item.portion;
+      this.gastoTotal += item.valor/item.parcelaAtual;
     });
   }
 
@@ -66,7 +65,7 @@ export class GastosComponent implements OnInit {
         allGastos.push.apply(allGastos, subs);
 
         allGastos.map(item => {
-          item.portion_value = item.value/item.portion;
+          item.portion_value = item.valor/item.parcelaAtual;
         });
 
         this.allSpending = allGastos;

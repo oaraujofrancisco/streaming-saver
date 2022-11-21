@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SerieOrMovie } from 'src/app/interfaces/SerieOrMovie';
+import { SerieOuFilme } from 'src/app/interfaces/serie-ou-filme';
 import { SubscriptionService } from 'src/app/services/subscription.service';
 
-import { Subscription } from '../../../interfaces/Subscription';
+import { Assinatura } from '../../../interfaces/assinatura';
 import { ApiExternaService } from '../../../services/api-externa.service';
 
 @Component({
@@ -13,8 +13,8 @@ import { ApiExternaService } from '../../../services/api-externa.service';
   styleUrls: ['./assinaturas.component.scss']
 })
 export class AssinaturasComponent implements OnInit {
-  allSubscriptions: Subscription[] = [];
-  subscriptions: Subscription[] = [];
+  allSubscriptions: Assinatura[] = [];
+  subscriptions: Assinatura[] = [];
   filterModel: string = 'Todas';
   gastoType: string = 'Assinatura';
   titleSubs: string = '';
@@ -56,7 +56,7 @@ export class AssinaturasComponent implements OnInit {
       this.subscriptions = this.allSubscriptions;
     } else {
       this.subscriptions = this.allSubscriptions.filter(subscription => {
-        return subscription.activated!.includes(option);
+        return subscription.ativado!.includes(option);
       });
     }
   }
@@ -90,30 +90,30 @@ export class AssinaturasComponent implements OnInit {
   addTitle(title: string, type: string, titleSubs: string) {
     let id: any = null;
     this.allSubscriptions.forEach(subs => {
-      const name = subs.name.toLowerCase().trim().replace(/\s/g, "");
+      const name = subs.nome.toLowerCase().trim().replace(/\s/g, "");
       if (name.includes(titleSubs)) {
         id = subs.id;
       }
     })
     if (id) {
-      let data: Subscription;
-      const serieOrMovie: SerieOrMovie = {};
+      let data: Assinatura;
+      const serieOrMovie: SerieOuFilme = {};
 
       this.subscriptionService.getSubscription(id)
         .subscribe(item => {
           const date = new Date().toLocaleDateString('pt-BR');
           data = item;
-          data.lastAccess = date;
-          data.lastUpdate = date;
+          data.ultimoAcesso = date;
+          data.ultimaAtualizacao = date;
 
-          serieOrMovie.title = title;
-          serieOrMovie.watched = true;
+          serieOrMovie.nome = title;
+          serieOrMovie.assistindo = true;
           if (type === 'series') {
             data.series?.unshift(serieOrMovie);
           } else {
-            data.movies?.unshift(serieOrMovie);
+            data.filmes?.unshift(serieOrMovie);
           }
-          this.subscriptionService.updateSubscription(id, data).subscribe(i => {
+          this.subscriptionService.updateSubscription(id, data).subscribe(() => {
             console.log('Success');
           });
         });

@@ -1,4 +1,4 @@
-export interface SerieMovieApiExterna {
+export interface SerieFilmeApiExterna {
   type?: string
   title?: string
   streamings?: string[]
