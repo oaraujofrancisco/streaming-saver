@@ -1,10 +1,8 @@
 package br.com.streaming.saver.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_gasto_variavel")
 public class GastoVariavel extends Gasto {
 
     private Long parcelaAtual;
