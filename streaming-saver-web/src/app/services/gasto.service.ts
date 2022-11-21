@@ -14,14 +14,21 @@ export class GastoService {
   constructor( private http: HttpClient ) { }
 
   getGasto(id: number): Observable<Gasto> {
+
     return this.http.get<Gasto>(`${this.urlApi}/gastos/${id}`);
   }
 
-  getGastos(): Observable<Gasto[]> {
-    return  this.http.get<Gasto[]>(`${this.urlApi}/gastos`);
+  getGastos(usuarioId: string): Observable<Gasto[]> {
+
+    const params = {
+      'usuario-id': usuarioId
+    }
+
+    return this.http.get<Gasto[]>(`${this.urlApi}/gastos`, {params});
   }
 
   createGasto(data: Gasto) {
+
     return this.http.post(`${this.urlApi}/gastos`, data);
   }
 

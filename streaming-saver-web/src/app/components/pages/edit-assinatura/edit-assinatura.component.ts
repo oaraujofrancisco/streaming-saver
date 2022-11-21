@@ -20,7 +20,7 @@ export class EditAssinaturaComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.actRoute.snapshot.paramMap.get('id'));
-    this.subsService.getSubscription(id).subscribe(item => {
+    this.subsService.getStreaming(id).subscribe(item => {
       this.assinatura = item;
     })
   }
@@ -32,7 +32,7 @@ export class EditAssinaturaComponent implements OnInit {
     subs.series = this.assinatura.series;
     subs.movies = this.assinatura.filmes;
 
-    this.subsService.updateSubscription(subs.id, subs).subscribe(() => {
+    this.subsService.updateAssinatura(subs.id, subs).subscribe(() => {
       this.router.navigate(['assinaturas']);
     });
   }

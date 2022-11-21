@@ -24,6 +24,8 @@ export class GastosComponent implements OnInit {
 
   allSpending: Gasto[] = [];
 
+  usuarioId!: string;
+
   constructor(
     private gastoService: GastoService,
     private subsService: StreamingService,
@@ -31,6 +33,14 @@ export class GastosComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('usuarioId')) {
+      localStorage.removeItem('usuarioId');
+      this.router.navigate(['login']);
+    } else {
+      // @ts-ignore
+      this.usuarioId = localStorage.getItem('usuarioId');
+    }
+
     this.getGastos();
   }
 
@@ -41,7 +51,7 @@ export class GastosComponent implements OnInit {
       this.spending = this.allSpending;
     } else {
       this.spending = this.allSpending.filter(spending => {
-        return spending.type.includes(option);
+        return spending.tipo.includes(option);
       });
     }
 
@@ -52,21 +62,21 @@ export class GastosComponent implements OnInit {
     this.gastoTotal = 0;
 
     this.spending.forEach(item => {
-      this.gastoTotal += item.valor/item.parcelaAtual;
+      if(!item.valorParcela) {
+        this.gastoTotal += item.valor;
+      } else {
+        this.gastoTotal += item.valorParcela
+      }
     });
   }
 
-  async getGastos() {
+   getGastos() {
     let allGastos: Gasto[];
-    await this.gastoService.getGastos().subscribe(gastos => {
+    this.gastoService.getGastos(this.usuarioId).subscribe(gastos => {
       allGastos = gastos;
 
-      this.subsService.getSubscriptions().subscribe(subs => {
+      this.subsService.getStreamings(this.usuarioId).subscribe(subs => {
         allGastos.push.apply(allGastos, subs);
-
-        allGastos.map(item => {
-          item.portion_value = item.valor/item.parcelaAtual;
-        });
 
         this.allSpending = allGastos;
         this.spending = allGastos;
@@ -77,7 +87,7 @@ export class GastosComponent implements OnInit {
 
   deleteGasto(id: number, type: string) {
     if (type === 'Assinatura') {
-      this.subsService.deleteSubscription(id).subscribe();
+      this.subsService.deleteStreaming(id).subscribe();
     } else {
       this.gastoService.deleteGasto(id).subscribe();
     }

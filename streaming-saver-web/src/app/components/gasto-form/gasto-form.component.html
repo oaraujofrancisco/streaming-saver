@@ -5,7 +5,7 @@
 
     <mat-form-field appearance="fill" class="gasto">
       <mat-label>Gasto</mat-label>
-      <mat-select (selectionChange)="applyFilter($event)" formControlName="type">
+      <mat-select (selectionChange)="applyFilter($event)" formControlName="tipo">
         <mat-option value="Fixo">Fixo</mat-option>
         <mat-option value="Variado">Variado</mat-option>
       </mat-select>
@@ -17,13 +17,13 @@
       <mat-form-field hintLabel="Max 12 caracteres" appearance="fill">
         <mat-label>Nome</mat-label>
         <input matInput #input maxlength="12" placeholder="Ex. Light, Netflix"
-        formControlName="name">
+        formControlName="nome">
         <mat-hint align="end"></mat-hint>
       </mat-form-field>
 
       <mat-form-field hintLabel="Selecione a Categoria" appearance="fill">
         <mat-label>Categoria</mat-label>
-        <mat-select formControlName="spent_type">
+        <mat-select formControlName="tipoGasto">
           <mat-option *ngFor="let category of categories" value="{{ category }}">{{ category }}</mat-option>
 
         </mat-select>
@@ -32,7 +32,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Forma de Pagamento</mat-label>
-        <mat-select formControlName="payment_type">
+        <mat-select formControlName="formaPagamento">
           <mat-option value="Crédito">Crédito</mat-option>
           <mat-option value="Débito">Débito</mat-option>
           <mat-option value="Pix">Pix</mat-option>
@@ -45,7 +45,7 @@
 
         <mat-form-field appearance="fill" floatLabel="always">
           <mat-label>Valor Total</mat-label>
-          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="value">
+          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="valor">
           <span matPrefix>R$&nbsp;</span>
           <mat-hint align="end">Insira o valor total</mat-hint>
         </mat-form-field>
@@ -53,7 +53,7 @@
         <mat-form-field appearance="fill" floatLabel="always">
           <mat-label>Parcela</mat-label>
           <input matInput type="number" value="1" min="1" max="32"
-          formControlName="portion">
+          formControlName="parcelasTotal">
           <mat-hint align="end">Número de Parcelas</mat-hint>
         </mat-form-field>
 
@@ -62,7 +62,7 @@
       <ng-template #gastoFixo>
         <mat-form-field appearance="fill" floatLabel="always">
           <mat-label>Valor Total</mat-label>
-          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="value">
+          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="valor">
           <span matPrefix>R$&nbsp;</span>
           <mat-hint align="end">Insira o valor total</mat-hint>
         </mat-form-field>

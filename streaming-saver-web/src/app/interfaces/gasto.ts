@@ -8,6 +8,7 @@ export interface Gasto {
   formaPagamento: string;
   usuario: Usuario;
   parcelaAtual: number;
-  portion_value?: number;
-  type: string;
+  parcelasTotal: number;
+  valorParcela: number;
+  tipo: string;
 }
