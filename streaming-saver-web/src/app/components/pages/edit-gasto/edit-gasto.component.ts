@@ -1,7 +1,7 @@
-import { GastoService } from './../../../services/gasto.service';
+import { GastoService } from '../../../services/gasto.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Gasto } from 'src/app/interfaces/Gasto';
+import { Gasto } from 'src/app/interfaces/gasto';
 import { Router } from '@angular/router';
 
 @Component({

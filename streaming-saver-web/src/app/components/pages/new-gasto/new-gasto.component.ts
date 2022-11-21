@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Gasto } from 'src/app/interfaces/Gasto';
-import { SubscriptionService } from 'src/app/services/subscription.service';
+import { Gasto } from 'src/app/interfaces/gasto';
+import { StreamingService } from 'src/app/services/streaming.service';
 
-import { Subscription } from './../../../interfaces/Subscription';
-import { GastoService } from './../../../services/gasto.service';
+import { Streaming } from '../../../interfaces/streaming';
+import { GastoService } from '../../../services/gasto.service';
 
 @Component({
   selector: 'app-new-gasto',
@@ -18,26 +18,26 @@ export class NewGastoComponent implements OnInit {
   constructor(
     private router: Router,
     private gastoService: GastoService,
-    private subsService: SubscriptionService
+    private subsService: StreamingService
   ) { }
 
   ngOnInit(): void {
   }
 
   async createHandler(gasto: Gasto) {
-    if (gasto.spent_type === 'Assinatura') {
-      const subs: Subscription = gasto;
-      const data = new Date().toLocaleDateString('pt-BR');
-      subs.activated = 'Ativa';
+    if (gasto.formaPagamento === 'Assinatura') {
+      const subs: Streaming = gasto;
+      const date = new Date().toLocaleDateString('pt-BR');
+      subs.ativado = 'Ativa';
       subs.series = [];
-      subs.movies = [];
-      subs.lastAccess = data;
-      subs.lastUpdate = data;
+      subs.filmes = [];
+      subs.ultimoAcesso = date;
+      subs.ultimaAtualizacao = date;
 
-      this.subsService.createSubscription(subs).subscribe(() => {
-        this.router.navigate(['gastos']);
+      this.subsService.createStreaming(subs).subscribe(() => {
+        this.router.navigate(['assinaturas']);
       })
-      
+
     } else {
       this.gastoService.createGasto(gasto).subscribe(() => {
         this.router.navigate(['gastos']);

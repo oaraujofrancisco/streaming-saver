@@ -32,16 +32,25 @@
     {
       "id": 1,
       "name": "Netflix",
-      "value": 59.9,
+      "value": 65.9,
       "spent_type": "Assinatura",
       "payment_type": "Débito",
       "portion": 1,
       "type": "Fixo",
-      "activated": "Ativa",
-      "series": [],
-      "movies": [],
-      "lastAccess": "18/11/2022",
-      "lastUpdate": "18/11/2022"
+      "activated": "Inativa",
+      "lastAccess": "20/11/2022",
+      "lastUpdate": "20/11/2022",
+      "series": [
+        {
+          "title": "Narcos",
+          "watched": true
+        },
+        {
+          "title": "Stranger Things",
+          "watched": true
+        }
+      ],
+      "movies": []
     },
     {
       "id": 2,
@@ -52,10 +61,86 @@
       "portion": 1,
       "type": "Fixo",
       "activated": "Ativa",
-      "series": [],
-      "movies": [],
+      "series": [
+        {
+          "title": "The Boys",
+          "watched": true
+        }
+      ],
+      "movies": [
+        {
+          "title": "21 Bridges",
+          "watched": true
+        }
+      ],
       "lastAccess": "18/11/2022",
       "lastUpdate": "18/11/2022"
+    },
+    {
+      "id": 3,
+      "name": "HBO Max",
+      "value": 49.9,
+      "spent_type": "Assinatura",
+      "payment_type": "Débito",
+      "portion": 1,
+      "type": "Fixo",
+      "activated": "Ativa",
+      "series": [
+        {
+          "title": "Game of Thrones",
+          "watched": true
+        }
+      ],
+      "movies": [
+        {
+          "title": "Batman",
+          "watched": true
+        }
+      ],
+      "lastAccess": "20/11/2022",
+      "lastUpdate": "20/11/2022"
+    },
+    {
+      "id": 4,
+      "name": "Disney +",
+      "value": 47.9,
+      "spent_type": "Assinatura",
+      "payment_type": "Débito",
+      "portion": 1,
+      "type": "Fixo",
+      "activated": "Inativa",
+      "lastAccess": "20/11/2022",
+      "lastUpdate": "20/11/2022",
+      "series": [
+        {
+          "title": "The Book of Boba Fett",
+          "watched": true
+        }
+      ],
+      "movies": [
+        {
+          "title": "Toy Story 3",
+          "watched": true
+        },
+        {
+          "title": "Toy Story",
+          "watched": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Star Plus",
+      "value": 57,
+      "spent_type": "Assinatura",
+      "payment_type": "Débito",
+      "portion": 1,
+      "type": "Fixo",
+      "activated": "Ativa",
+      "lastAccess": "20/11/2022",
+      "lastUpdate": "20/11/2022",
+      "series": [],
+      "movies": []
     }
   ]
 }

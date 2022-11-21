@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SubscriptionService } from './subscription.service';
+import { ApiExternaService } from './api-externa.service';
 
-describe('SubscriptionService', () => {
-  let service: SubscriptionService;
+describe('ApiExternaService', () => {
+  let service: ApiExternaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SubscriptionService);
+    service = TestBed.inject(ApiExternaService);
   });
 
   it('should be created', () => {

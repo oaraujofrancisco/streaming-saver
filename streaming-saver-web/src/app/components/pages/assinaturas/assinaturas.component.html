@@ -1,4 +1,59 @@
 <div class="list-container">
+  <mat-card class="search">
+    <form [formGroup]="searchForm">
+      <mat-card-title>Buscar Título</mat-card-title>
+
+      <mat-form-field class="input-search" hintLabel="Digite o nome do Filme ou Serie" appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput #input maxlength="12" placeholder="Ex. Batman, Superman"
+               formControlName="name">
+        <mat-hint align="end"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="gasto">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="movie">Filme</mat-option>
+          <mat-option value="series">Serie</mat-option>
+        </mat-select>
+        <mat-hint align="end">Selecione o tipo (Filme ou Serie)</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" [disabled]="searchForm.invalid" (click)="procurarFilmeSerie()">Buscar<mat-icon fontIcon="search"></mat-icon></button>
+    </form>
+  </mat-card>
+</div>
+
+<div *ngIf="filmesSeriesEncontrados" class="list-container">
+  <mat-card class="search">
+    <mat-card-title>Filmes Encontrados</mat-card-title>
+
+    <mat-list>
+      <mat-list-item class="mat-item" *ngFor="let filmeSerieEncontrado of filmesSeriesEncontrados">
+        {{filmeSerieEncontrado.title}} -
+        {{filmeSerieEncontrado.year}} -
+
+        <div class="mat-select">
+          <mat-form-field appearance="fill">
+              <mat-label>Streaming</mat-label>
+              <mat-select [(ngModel)]="titleSubs">
+                <mat-option *ngFor="let streaming of filmeSerieEncontrado.streaming" [value]="streaming">
+                  {{streaming}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-icon-button color="primary" (click)="addTitle(filmeSerieEncontrado.title,filmeSerieEncontrado.type, titleSubs)">
+              <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+    </mat-list>
+  </mat-card>
+</div>
+
+<div class="list-container">
   <mat-card class="subscriptions">
     <mat-card-title>Assinaturas</mat-card-title>
     <mat-radio-group class="filter"
@@ -25,13 +80,17 @@
       <!-- Watching Column -->
       <ng-container matColumnDef="watching">
         <th mat-header-cell *matHeaderCellDef> Assistindo </th>
-        <td mat-cell *matCellDef="let element"> {{ element.watching }} </td>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.movies[0]; else series">{{ element.movies[0].title }}</span>
+          <ng-template #series><span *ngIf="element.series[0]; else noContent">{{ element.series[0].title }}</span></ng-template>
+          <ng-template #noContent>Nenhum</ng-template>
+        </td>
       </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> {{ element.status }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.activated }} </td>
       </ng-container>
 
       <!-- Actions Column -->
@@ -42,13 +101,16 @@
           <button mat-icon-button
             matTooltip="Editar"
             [matTooltipPosition]="'left'"
-            color="primary">
+            color="primary"
+            routerLink="edit/{{ element.id }}"
+            >
             <mat-icon fontIcon="edit"></mat-icon>
           </button>
           <button mat-icon-button
             matTooltip="Deletar"
             [matTooltipPosition]="'right'"
-            color="warn">
+            color="warn"
+            (click)="deleteAssinatura(element.id)">
             <mat-icon fontIcon="delete"></mat-icon>
           </button>
         </td>

@@ -1,0 +1,39 @@
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+.spending {
+  width: 600px;
+  padding: 30px;
+
+  .form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 60px;
+
+    .grid {
+      display: grid;
+      grid-template-columns: 280px 280px;
+      justify-content: space-around;
+      gap: 10px;
+
+      .valor-component {
+        display: flex;
+        gap: 10px;
+
+        .mat-form-field {
+          width: 130px;
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .submit {
+    position: absolute;
+    bottom: -70px;
+    right: -8px;
+  }
+}

@@ -1,7 +1,9 @@
-import { SubscriptionService } from 'src/app/services/subscription.service';
-import { GastoService } from './../../../services/gasto.service';
 import { Component, OnInit } from '@angular/core';
-import { Gasto } from 'src/app/interfaces/Gasto';
+import { Router } from '@angular/router';
+import { Gasto } from 'src/app/interfaces/gasto';
+import { StreamingService } from 'src/app/services/streaming.service';
+
+import { GastoService } from '../../../services/gasto.service';
 
 @Component({
   selector: 'app-gastos',
@@ -22,14 +24,24 @@ export class GastosComponent implements OnInit {
 
   allSpending: Gasto[] = [];
 
+  usuarioId!: string;
+
   constructor(
     private gastoService: GastoService,
-    private subsService: SubscriptionService
+    private subsService: StreamingService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
-    this.getGastos();
+    if(!localStorage.getItem('usuarioId')) {
+      localStorage.removeItem('usuarioId');
+      this.router.navigate(['login']);
+    } else {
+      // @ts-ignore
+      this.usuarioId = localStorage.getItem('usuarioId');
+    }
 
+    this.getGastos();
   }
 
   applyFilter() {
@@ -50,20 +62,20 @@ export class GastosComponent implements OnInit {
     this.gastoTotal = 0;
 
     this.spending.forEach(item => {
-      this.gastoTotal += item.value/item.portion;
+      this.gastoTotal += item.valor/item.parcelaAtual;
     });
   }
 
-  async getGastos() {
+   getGastos() {
     let allGastos: Gasto[];
-    await this.gastoService.getGastos().subscribe(gastos => {
+    this.gastoService.getGastos(this.usuarioId).subscribe(gastos => {
       allGastos = gastos;
 
-      this.subsService.getSubscriptions().subscribe(subs => {
+      this.subsService.getStreamings(this.usuarioId).subscribe(subs => {
         allGastos.push.apply(allGastos, subs);
 
         allGastos.map(item => {
-          item.portion_value = item.value/item.portion;
+          item.portion_value = item.valor/item.parcelaAtual;
         });
 
         this.allSpending = allGastos;
@@ -75,7 +87,7 @@ export class GastosComponent implements OnInit {
 
   deleteGasto(id: number, type: string) {
     if (type === 'Assinatura') {
-      this.subsService.deleteSubscription(id).subscribe();
+      this.subsService.deleteStreaming(id).subscribe();
     } else {
       this.gastoService.deleteGasto(id).subscribe();
     }
@@ -87,6 +99,14 @@ export class GastosComponent implements OnInit {
       return item.id !== id;
     });
     this.calcTotal();
+  }
+
+  toEdit(id: number, type: string) {
+    if (type === 'Assinatura') {
+      this.router.navigate([`assinaturas/edit/${id}`]);
+    } else {
+      this.router.navigate([`gastos/edit/${id}`]);
+    }
   }
 
 }

@@ -17,7 +17,10 @@ public class GastoService {
     }
 
 
-    public List<Gasto> buscarTodos(String tipoGasto) {
+    public List<Gasto> buscarTodos(Long usuarioId) {
+
+//        gastoRepository.fin
+
         return gastoRepository.findAll();
     }
 

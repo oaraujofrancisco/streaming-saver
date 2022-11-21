@@ -1,0 +1,91 @@
+<mat-card class="spending">
+  <mat-card-title>Editar Streaming</mat-card-title>
+  <form class="form" [formGroup]="gastoForm" #formDir="ngForm" (ngSubmit)="submit()">
+    <input hidden formControlName="id" type="text">
+
+    <div class="grid">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Gasto</mat-label>
+        <mat-select (selectionChange)="applyFilter($event)" formControlName="type">
+          <mat-option value="Fixo">Fixo</mat-option>
+          <mat-option value="Variado">Variado</mat-option>
+        </mat-select>
+        <mat-hint align="end">Selecione o tipo de gasto</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="activated">
+          <mat-option value="Ativa">Ativa</mat-option>
+          <mat-option value="Inativa">Inativa</mat-option>
+        </mat-select>
+        <mat-hint align="end">Status da assinatura</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Max 12 caracteres" appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput #input maxlength="12" placeholder="Ex. Light, Netflix"
+        formControlName="name">
+        <mat-hint align="end"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Selecione a Categoria" appearance="fill">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="spent_type">
+          <mat-option *ngFor="let category of categories" value="{{ category }}">{{ category }}</mat-option>
+
+        </mat-select>
+        <mat-hint align="end"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Forma de Pagamento</mat-label>
+        <mat-select formControlName="payment_type">
+          <mat-option value="Crédito">Crédito</mat-option>
+          <mat-option value="Débito">Débito</mat-option>
+          <mat-option value="Pix">Pix</mat-option>
+          <mat-option value="Dinheiro">Dinheiro</mat-option>
+        </mat-select>
+        <mat-hint align="end">Selecione a forma de pagamento</mat-hint>
+      </mat-form-field>
+
+      <div class="valor-component" *ngIf="gasto === 'Variado'; else gastoFixo">
+
+        <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Valor Total</mat-label>
+          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="value">
+          <span matPrefix>R$&nbsp;</span>
+          <mat-hint align="end">Insira o valor total</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Parcela</mat-label>
+          <input matInput type="number" value="1" min="1" max="32"
+          formControlName="portion">
+          <mat-hint align="end">Número de Parcelas</mat-hint>
+        </mat-form-field>
+
+      </div>
+
+      <ng-template #gastoFixo>
+        <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Valor Total</mat-label>
+          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="value">
+          <span matPrefix>R$&nbsp;</span>
+          <mat-hint align="end">Insira o valor total</mat-hint>
+        </mat-form-field>
+      </ng-template>
+    </div>
+
+    <button mat-mini-fab
+        matTooltip="Adicionar Gasto"
+        [matTooltipPosition]="'below'"
+        color="primary"
+        class="submit">
+        <mat-icon fontIcon="edit"></mat-icon>
+    </button>
+
+  </form>
+
+</mat-card>

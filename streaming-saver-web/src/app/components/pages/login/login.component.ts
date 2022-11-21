@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import {Usuario} from "../../../interfaces/usuario";
+import {UsuarioService} from "../../../services/usuario.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,9 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UsuarioService,
   ) { }
 
   ngOnInit(): void {
@@ -37,4 +42,38 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
+
+  validarLogin() {
+    if(this.loginForm.valid){
+
+      const usuarioLogin: Usuario = {
+        nome: "",
+        senha: this.loginForm.value.password,
+        email: this.loginForm.value.email,
+      }
+
+      this.userService.getUser(usuarioLogin).subscribe(valor => {
+        localStorage.setItem('usuarioId', JSON.stringify(valor.id));
+
+        this.router.navigate(['/']);
+        }
+      )
+    }
+  }
+
+  createLogin () {
+      if(this.loginForm.valid) {
+        const usuarioLogin: Usuario = {
+          nome: "",
+          senha: this.loginForm.value.password,
+          email: this.loginForm.value.email,
+        }
+
+        this.userService.createUser(usuarioLogin).subscribe(valor => {
+          localStorage.setItem('usuarioId', JSON.stringify(valor.id));
+          this.router.navigate(['/']);
+          }
+        )
+      }
+    }
 }
