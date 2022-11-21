@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SubscriptionService } from 'src/app/services/subscription.service';
+import { StreamingService } from 'src/app/services/streaming.service';
 
-import { Assinatura } from '../../../interfaces/assinatura';
+import { Streaming } from '../../../interfaces/streaming';
 
 @Component({
   selector: 'app-edit-assinatura',
@@ -10,11 +10,11 @@ import { Assinatura } from '../../../interfaces/assinatura';
   styleUrls: ['./edit-assinatura.component.scss']
 })
 export class EditAssinaturaComponent implements OnInit {
-  assinatura!: Assinatura;
+  assinatura!: Streaming;
 
   constructor(
     private actRoute: ActivatedRoute,
-    private subsService: SubscriptionService,
+    private subsService: StreamingService,
     private router: Router
   ) { }
 

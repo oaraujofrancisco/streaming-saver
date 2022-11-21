@@ -16,6 +16,8 @@ import { EditGastoComponent } from './components/pages/edit-gasto/edit-gasto.com
 import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
 import { AssinaturaFormComponent } from './components/assinatura-form/assinatura-form.component';
 import { EditAssinaturaComponent } from './components/pages/edit-assinatura/edit-assinatura.component';
+import {UsuarioService} from "./services/usuario.service";
+import { HomeComponent } from './components/pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -29,19 +31,22 @@ import { EditAssinaturaComponent } from './components/pages/edit-assinatura/edit
     GastoFormComponent,
     AssinaturaFormComponent,
     EditAssinaturaComponent,
+    HomeComponent,
 
   ],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MaterialModule,
-        HttpClientModule,
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MaterialModule,
+      HttpClientModule,
 
     ],
-  providers: [],
+  providers: [
+    UsuarioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

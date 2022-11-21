@@ -8,27 +8,28 @@ import { Gasto } from '../interfaces/gasto';
   providedIn: 'root'
 })
 export class GastoService {
-  url: string = 'http://localhost:3000';
+
+  private readonly urlApi = "api";
 
   constructor( private http: HttpClient ) { }
 
   getGasto(id: number): Observable<Gasto> {
-    return this.http.get<Gasto>(`${this.url}/gastos/${id}`);
+    return this.http.get<Gasto>(`${this.urlApi}/gastos/${id}`);
   }
 
   getGastos(): Observable<Gasto[]> {
-    return  this.http.get<Gasto[]>(`${this.url}/gastos`);
+    return  this.http.get<Gasto[]>(`${this.urlApi}/gastos`);
   }
 
   createGasto(data: Gasto) {
-    return this.http.post(`${this.url}/gastos`, data);
+    return this.http.post(`${this.urlApi}/gastos`, data);
   }
 
   deleteGasto(id: number) {
-    return this.http.delete(`${this.url}/gastos/${id}`);
+    return this.http.delete(`${this.urlApi}/gastos/${id}`);
   }
 
   updateGasto(id: number, data: Gasto) {
-    return this.http.put(`${this.url}/gastos/${id}`, data);
+    return this.http.put(`${this.urlApi}/gastos/${id}`, data);
   }
 }

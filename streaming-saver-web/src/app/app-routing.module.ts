@@ -8,15 +8,17 @@ import { GastosComponent } from './components/pages/gastos/gastos.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { NewGastoComponent } from './components/pages/new-gasto/new-gasto.component';
 import { LoginGuard } from "./core/guard/login.guard";
+import {HomeComponent} from "./components/pages/home/home.component";
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'login', component: LoginComponent },
-  { path: 'assinaturas', component: AssinaturasComponent, canActivate: [LoginGuard]  },
-  { path: 'assinaturas/edit/:id', component: EditAssinaturaComponent, canActivate: [LoginGuard]  },
-  { path: 'gastos', component: GastosComponent, canActivate: [LoginGuard]  },
-  { path: 'gastos/new', component: NewGastoComponent, canActivate: [LoginGuard]  },
-  { path: 'gastos/edit/:id', component: EditGastoComponent, canActivate: [LoginGuard]  },
+  { path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
+  { path: 'assinaturas', component: AssinaturasComponent, canActivate: [LoginGuard] },
+  { path: 'assinaturas/edit/:id', component: EditAssinaturaComponent, canActivate: [LoginGuard] },
+  { path: 'gastos', component: GastosComponent, canActivate: [LoginGuard] },
+  { path: 'gastos/new', component: NewGastoComponent, canActivate: [LoginGuard] },
+  { path: 'gastos/edit/:id', component: EditGastoComponent, canActivate: [LoginGuard] },
 ];
 
 @NgModule({
