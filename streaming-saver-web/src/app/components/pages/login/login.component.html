@@ -23,10 +23,9 @@
       </mat-form-field>
 
       <mat-card-actions align="end" class="buttons">
-        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login <mat-icon fontIcon="login"></mat-icon></button>
-        <button mat-raised-button>Cadastre-se</button>
+        <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="validarLogin()">Login <mat-icon fontIcon="login"></mat-icon></button>
+        <button mat-raised-button (click)="createLogin()">Cadastre-se</button>
       </mat-card-actions>
-
     </mat-card>
   </form>
 </div>
