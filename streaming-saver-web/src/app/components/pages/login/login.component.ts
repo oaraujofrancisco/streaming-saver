@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
       this.userService.getUser(usuarioLogin).subscribe(valor => {
         localStorage.setItem('usuarioId', JSON.stringify(valor.id));
         localStorage.setItem('usuarioEmail', valor.email);
-        console.log(localStorage);
 
         }
       )
