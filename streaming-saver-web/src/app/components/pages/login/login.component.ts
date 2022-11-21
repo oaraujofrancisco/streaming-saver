@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import {Usuario} from "../../../interfaces/usuario";
-import {UserService} from "../../../services/user.service";
+import {UsuarioService} from "../../../services/usuario.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,9 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UsuarioService,
   ) { }
 
   ngOnInit(): void {
@@ -52,8 +54,8 @@ export class LoginComponent implements OnInit {
 
       this.userService.getUser(usuarioLogin).subscribe(valor => {
         localStorage.setItem('usuarioId', JSON.stringify(valor.id));
-        localStorage.setItem('usuarioEmail', valor.email);
 
+        this.router.navigate(['/']);
         }
       )
     }
@@ -68,8 +70,8 @@ export class LoginComponent implements OnInit {
         }
 
         this.userService.createUser(usuarioLogin).subscribe(valor => {
-            localStorage.setItem('usuarioId', JSON.stringify(valor.id));
-
+          localStorage.setItem('usuarioId', JSON.stringify(valor.id));
+          this.router.navigate(['/']);
           }
         )
       }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gasto } from 'src/app/interfaces/gasto';
-import { SubscriptionService } from 'src/app/services/subscription.service';
+import { StreamingService } from 'src/app/services/streaming.service';
 
 import { GastoService } from '../../../services/gasto.service';
 
@@ -26,7 +26,7 @@ export class GastosComponent implements OnInit {
 
   constructor(
     private gastoService: GastoService,
-    private subsService: SubscriptionService,
+    private subsService: StreamingService,
     private router: Router
     ) { }
 

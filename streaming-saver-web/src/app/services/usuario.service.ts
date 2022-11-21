@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../interfaces/usuario";
@@ -6,9 +6,11 @@ import {Usuario} from "../interfaces/usuario";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UsuarioService {
 
   private readonly urlApi = "api";
+
+  isLogado: boolean = false;
 
   constructor( private http: HttpClient ) { }
 
@@ -29,7 +31,12 @@ export class UserService {
       senha: usuarioLogin.senha
     }
 
-
     return this.http.post<Usuario>(`${this.urlApi}/usuario`, usuarioSalvar);
+  }
+
+  validarUsuarioLogado(isLogado: boolean) {
+    this.isLogado = isLogado;
+
+    return this.isLogado;
   }
 }

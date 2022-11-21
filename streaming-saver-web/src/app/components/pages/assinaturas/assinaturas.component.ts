@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SerieOuFilme } from 'src/app/interfaces/serie-ou-filme';
-import { SubscriptionService } from 'src/app/services/subscription.service';
+import { StreamingService } from 'src/app/services/streaming.service';
 
-import { Assinatura } from '../../../interfaces/assinatura';
+import { Streaming } from '../../../interfaces/streaming';
 import { ApiExternaService } from '../../../services/api-externa.service';
 
 @Component({
@@ -13,8 +13,8 @@ import { ApiExternaService } from '../../../services/api-externa.service';
   styleUrls: ['./assinaturas.component.scss']
 })
 export class AssinaturasComponent implements OnInit {
-  allSubscriptions: Assinatura[] = [];
-  subscriptions: Assinatura[] = [];
+  allSubscriptions: Streaming[] = [];
+  subscriptions: Streaming[] = [];
   filterModel: string = 'Todas';
   gastoType: string = 'Assinatura';
   titleSubs: string = '';
@@ -25,11 +25,11 @@ export class AssinaturasComponent implements OnInit {
   filmesSeriesEncontrados!: any;
 
   constructor(
-    private subscriptionService: SubscriptionService,
+    private subscriptionService: StreamingService,
     private router: Router,
     private formBuilder: FormBuilder,
     private apiExternaService: ApiExternaService,
-    private subsService: SubscriptionService
+    private subsService: StreamingService
   ) { }
 
   ngOnInit(): void {
@@ -96,7 +96,7 @@ export class AssinaturasComponent implements OnInit {
       }
     })
     if (id) {
-      let data: Assinatura;
+      let data: Streaming;
       const serieOrMovie: SerieOuFilme = {};
 
       this.subscriptionService.getSubscription(id)

@@ -1,4 +1,4 @@
-import { Assinatura } from '../../interfaces/assinatura';
+import { Streaming } from '../../interfaces/streaming';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { Gasto } from 'src/app/interfaces/gasto';
 })
 export class AssinaturaFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<Gasto>();
-  @Input() subsData: Assinatura | null = null;
+  @Input() subsData: Streaming | null = null;
 
   gasto: string = 'Fixo';
   gastoForm!: FormGroup;

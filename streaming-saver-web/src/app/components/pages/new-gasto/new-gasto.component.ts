@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Gasto } from 'src/app/interfaces/gasto';
-import { SubscriptionService } from 'src/app/services/subscription.service';
+import { StreamingService } from 'src/app/services/streaming.service';
 
-import { Assinatura } from '../../../interfaces/assinatura';
+import { Streaming } from '../../../interfaces/streaming';
 import { GastoService } from '../../../services/gasto.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class NewGastoComponent implements OnInit {
   constructor(
     private router: Router,
     private gastoService: GastoService,
-    private subsService: SubscriptionService
+    private subsService: StreamingService
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class NewGastoComponent implements OnInit {
 
   async createHandler(gasto: Gasto) {
     if (gasto.formaPagamento === 'Assinatura') {
-      const subs: Assinatura = gasto;
+      const subs: Streaming = gasto;
       const date = new Date().toLocaleDateString('pt-BR');
       subs.ativado = 'Ativa';
       subs.series = [];
