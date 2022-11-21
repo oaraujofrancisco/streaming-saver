@@ -19,9 +19,7 @@ public class GastoService {
 
     public List<Gasto> buscarTodos(Long usuarioId) {
 
-//        gastoRepository.fin
-
-        return gastoRepository.findAll();
+        return gastoRepository.findByUsuario_Id(usuarioId);
     }
 
     public Gasto buscarPorId(Long id) {
@@ -52,9 +50,9 @@ public class GastoService {
 
     public List<Gasto> excluirGasto(Long id) {
         Gasto gastoParaExcluir = buscarPorId(id);
-
+        Long usuarioId = gastoParaExcluir.getId();
         gastoRepository.delete(gastoParaExcluir);
 
-        return this.buscarTodos("");
+        return this.buscarTodos(usuarioId);
     }
 }

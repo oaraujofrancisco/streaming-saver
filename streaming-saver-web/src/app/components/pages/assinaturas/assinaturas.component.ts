@@ -44,10 +44,10 @@ export class AssinaturasComponent implements OnInit {
     }
 
     this.searchForm = this.formBuilder.group({
-      name: ['', [
+      nome: ['', [
         Validators.required,
       ]],
-      type: ['', [
+      filmeOuSerie: ['', [
         Validators.required,
       ]]
     })
@@ -80,9 +80,9 @@ export class AssinaturasComponent implements OnInit {
 
     if(this.searchForm.valid) {
       const name = this.searchForm.value?.name;
-      const type = this.searchForm.value?.type;
+      const filmeOuSerie = this.searchForm.value?.filmeOuSerie;
 
-      this.apiExternaService.getFilme(name, type).subscribe((valorRetornado: any) => {
+      this.apiExternaService.getFilme(name, filmeOuSerie).subscribe((valorRetornado: any) => {
         valorRetornado.result.forEach( (item: any) => {
           const availability: any = item.streamingInfo.br;
           if (availability) {

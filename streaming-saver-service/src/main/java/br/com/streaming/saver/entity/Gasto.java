@@ -21,6 +21,14 @@ public class Gasto implements Serializable {
 
     private String formaPagamento;
 
+    private Long parcelaAtual;
+
+    private Long parcelasTotal;
+
+    private Long valorParcela;
+
+    private String tipo;
+
     @OneToOne
     private Usuario usuario;
 
@@ -74,4 +82,37 @@ public class Gasto implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Long getParcelaAtual() {
+        return parcelaAtual;
+    }
+
+    public void setParcelaAtual(Long parcelaAtual) {
+        this.parcelaAtual = parcelaAtual;
+    }
+
+    public Long getParcelasTotal() {
+        return parcelasTotal;
+    }
+
+    public void setParcelasTotal(Long parcelasTotal) {
+        this.parcelasTotal = parcelasTotal;
+    }
+
+    public Long getValorParcela() {
+        return valorParcela;
+    }
+
+    public void setValorParcela(Long valorParcela) {
+        this.valorParcela = valorParcela;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
 }

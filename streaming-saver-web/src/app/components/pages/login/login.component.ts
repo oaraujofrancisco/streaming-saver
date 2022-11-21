@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
 
       const usuarioLogin: Usuario = {
+        id: 0,
         nome: "",
         senha: this.loginForm.value.password,
         email: this.loginForm.value.email,
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
   createLogin () {
       if(this.loginForm.valid) {
         const usuarioLogin: Usuario = {
+          id: 0,
           nome: "",
           senha: this.loginForm.value.password,
           email: this.loginForm.value.email,

@@ -14,6 +14,7 @@ import { GastoService } from '../../../services/gasto.service';
 export class NewGastoComponent implements OnInit {
   matTitle: string = 'Adicionar gasto';
   fontIcon: string = 'add';
+  usuarioId!: string;
 
   constructor(
     private router: Router,
@@ -22,9 +23,23 @@ export class NewGastoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('usuarioId')) {
+      localStorage.removeItem('usuarioId');
+      this.router.navigate(['login']);
+    } else {
+      // @ts-ignore
+      this.usuarioId = localStorage.getItem('usuarioId');
+    }
   }
 
-  async createHandler(gasto: Gasto) {
+  createHandler(gasto: Gasto) {
+    gasto.usuario = {
+      id: +this.usuarioId,
+      nome: "",
+      senha: "",
+      email: "",
+    }
+
     if (gasto.formaPagamento === 'Assinatura') {
       const subs: Streaming = gasto;
       const date = new Date().toLocaleDateString('pt-BR');
