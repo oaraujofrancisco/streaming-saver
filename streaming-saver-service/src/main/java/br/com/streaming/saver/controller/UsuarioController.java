@@ -1,14 +1,10 @@
 package br.com.streaming.saver.controller;
 
-import br.com.streaming.saver.entity.Gasto;
 import br.com.streaming.saver.entity.Usuario;
-import br.com.streaming.saver.service.GastoService;
 import br.com.streaming.saver.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/usuario")
