@@ -44,10 +44,10 @@ export class AssinaturasComponent implements OnInit {
     }
 
     this.searchForm = this.formBuilder.group({
-      nome: ['', [
+      name: ['', [
         Validators.required,
       ]],
-      filmeOuSerie: ['', [
+      type: ['', [
         Validators.required,
       ]]
     })
@@ -62,13 +62,16 @@ export class AssinaturasComponent implements OnInit {
   applyFilter() {
     const option = this.filterModel;
 
-    if (option === 'Todas') {
-      this.subscriptions = this.allSubscriptions;
-    } else {
-      this.subscriptions = this.allSubscriptions.filter(subscription => {
-        return subscription.ativado!.includes(option);
-      });
+    this.subscriptions = this.allSubscriptions;
+
+    if (option === 'Ativa') {
+      this.subscriptions = this.allSubscriptions.filter(subscription => subscription.ativado);
     }
+
+    if (option === 'Inativa') {
+      this.subscriptions = this.allSubscriptions.filter(subscription => !subscription.ativado);
+    }
+
   }
 
   toGasto() {
@@ -80,9 +83,9 @@ export class AssinaturasComponent implements OnInit {
 
     if(this.searchForm.valid) {
       const name = this.searchForm.value?.name;
-      const filmeOuSerie = this.searchForm.value?.filmeOuSerie;
+      const type = this.searchForm.value?.type;
 
-      this.apiExternaService.getFilme(name, filmeOuSerie).subscribe((valorRetornado: any) => {
+      this.apiExternaService.getFilme(name, type).subscribe((valorRetornado: any) => {
         valorRetornado.result.forEach( (item: any) => {
           const availability: any = item.streamingInfo.br;
           if (availability) {
@@ -111,10 +114,7 @@ export class AssinaturasComponent implements OnInit {
 
       this.subscriptionService.getStreaming(id)
         .subscribe(item => {
-          const date = new Date().toLocaleDateString('pt-BR');
           data = item;
-          data.ultimoAcesso = date;
-          data.ultimaAtualizacao = date;
 
           serieOrMovie.nome = title;
           serieOrMovie.assistindo = true;

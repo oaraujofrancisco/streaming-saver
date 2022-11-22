@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface StreamingRepository extends JpaRepository<Streaming, Long> {
 
+    List<Streaming> findByUsuario_Id(Long id);
 }
