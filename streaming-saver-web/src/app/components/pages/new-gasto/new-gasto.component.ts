@@ -40,14 +40,21 @@ export class NewGastoComponent implements OnInit {
       email: "",
     }
 
-    if (gasto.formaPagamento === 'Assinatura') {
+    if(gasto.parcelasTotal > 0) {
+      gasto.valorParcela = gasto.valor/gasto.parcelasTotal;
+    } else {
+      gasto.valorParcela = 0;
+      gasto.parcelaAtual = 0;
+    }
+
+    if (gasto.tipoGasto === 'Assinatura') {
       const subs: Streaming = gasto;
-      const date = new Date().toLocaleDateString('pt-BR');
-      subs.ativado = 'Ativa';
+      // const date = new Date().toLocaleDateString('pt-BR');
+      // subs.ativado = 'Ativa';
       subs.series = [];
       subs.filmes = [];
-      subs.ultimoAcesso = date;
-      subs.ultimaAtualizacao = date;
+      // subs.ultimoAcesso = date;
+      // subs.ultimaAtualizacao = date;
 
       this.subsService.createStreaming(subs).subscribe(() => {
         this.router.navigate(['assinaturas']);

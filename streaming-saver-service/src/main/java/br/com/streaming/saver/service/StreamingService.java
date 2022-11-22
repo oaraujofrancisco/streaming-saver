@@ -4,6 +4,7 @@ import br.com.streaming.saver.entity.Streaming;
 import br.com.streaming.saver.repository.StreamingRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,8 @@ public class StreamingService {
     }
 
 
-    public List<Streaming> buscarTodos(String tipoStreaming) {
-        return streamingRepository.findAll();
+    public List<Streaming> buscarTodos(Long usuarioId) {
+        return streamingRepository.findByUsuario_Id(usuarioId);
     }
 
     public Streaming buscarPorId(Long id) {
@@ -32,7 +33,9 @@ public class StreamingService {
 
     public Streaming salvarStreaming(Streaming streaming) {
         streaming.setId(null);
-
+        streaming.setAtivado(true);
+        streaming.setUltimaAtualizacao(LocalDate.now());
+        streaming.setUltimoAcesso(LocalDate.now());
         return streamingRepository.save(streaming);
     }
 
@@ -43,18 +46,18 @@ public class StreamingService {
         streamingParaAtualizar.setValor(streaming.getValor());
         streamingParaAtualizar.setTipoGasto(streaming.getTipoGasto());
         streamingParaAtualizar.setFormaPagamento(streaming.getFormaPagamento());
-        streamingParaAtualizar.setUltimoAcesso(streaming.getUltimoAcesso());
-        streamingParaAtualizar.setUltimaAtualizacao(streaming.getUltimaAtualizacao());
+        streamingParaAtualizar.setUltimaAtualizacao(LocalDate.now());
         streamingParaAtualizar.setAtivado(streaming.getAtivado());
+        streamingParaAtualizar.setUltimoAcesso(streamingParaAtualizar.getUltimoAcesso());
 
         return streamingRepository.save(streamingParaAtualizar);
     }
 
     public List<Streaming> excluirStreaming(Long id) {
-        Streaming StreamingParaExcluir = buscarPorId(id);
+        Streaming streamingParaExcluir = buscarPorId(id);
+        Long usuarioId = streamingParaExcluir.getId();
+        streamingRepository.delete(streamingParaExcluir);
 
-        streamingRepository.delete(StreamingParaExcluir);
-
-        return buscarTodos("");
+        return buscarTodos(usuarioId);
     }
 }

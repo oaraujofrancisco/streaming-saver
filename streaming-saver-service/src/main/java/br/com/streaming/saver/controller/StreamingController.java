@@ -20,9 +20,9 @@ public class StreamingController {
 
     @GetMapping
     public ResponseEntity<List<Streaming>> buscarTodos(
-            @RequestParam(value = "tipo-gasto", defaultValue = "streaming") String tipoStreaming
+            @RequestParam(value = "usuario-id", defaultValue = "0") Long usuarioId
     ) {
-        return ResponseEntity.ok(streamingService.buscarTodos(tipoStreaming));
+        return ResponseEntity.ok(streamingService.buscarTodos(usuarioId));
     }
 
     @GetMapping(path = "/{id}")

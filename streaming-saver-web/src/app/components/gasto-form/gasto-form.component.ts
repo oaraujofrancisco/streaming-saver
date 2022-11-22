@@ -48,7 +48,7 @@ export class GastoFormComponent implements OnInit {
       parcelaAtual: [this.gastoData ? this.gastoData.parcelaAtual : 1 , [
         Validators.required
       ]],
-      parcelasTotal: [this.gastoData ? this.gastoData.parcelasTotal : 1 , [
+      parcelasTotal: [this.gastoData ? this.gastoData.parcelasTotal : 0 , [
         Validators.required
       ]],
       tipo: [this.gastoData ? this.gastoData.tipo : '', [
@@ -90,6 +90,7 @@ export class GastoFormComponent implements OnInit {
   }
 
   submit() {
+
     if (this.gastoForm.invalid) {
       return;
     }
