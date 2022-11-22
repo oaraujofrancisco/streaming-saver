@@ -14,7 +14,6 @@ export class GastoFormComponent implements OnInit {
   @Input() matTitle!: string;
   @Input() gastoData: Gasto | null = null;
 
-  gasto: string = 'Fixo';
   gastoForm!: FormGroup;
   subscription!: string;
   categories: string[] =
@@ -52,7 +51,7 @@ export class GastoFormComponent implements OnInit {
       parcelasTotal: [this.gastoData ? this.gastoData.parcelasTotal : 1 , [
         Validators.required
       ]],
-      tipo: [this.gastoData ? this.gastoData.tipo : this.gasto, [
+      tipo: [this.gastoData ? this.gastoData.tipo : '', [
         Validators.required
       ]]
     });
