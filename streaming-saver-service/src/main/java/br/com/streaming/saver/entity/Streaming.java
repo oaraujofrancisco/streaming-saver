@@ -1,8 +1,9 @@
 package br.com.streaming.saver.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,11 +13,11 @@ public class Streaming extends Gasto {
 
     private LocalDate ultimaAtualizacao;
 
-    @OneToMany
-    private List<Serie> series;
+    @ManyToMany(mappedBy = "streamings")
+    private List<Serie> series = new ArrayList<>();
 
-    @OneToMany
-    private List<Filme> filmes;
+    @ManyToMany(mappedBy = "streamings")
+    private List<Filme> filmes = new ArrayList<>();
 
     private Boolean ativado;
 

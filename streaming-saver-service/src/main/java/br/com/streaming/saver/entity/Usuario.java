@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_usuario")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,10 +20,10 @@ public class Usuario implements Serializable {
     private String email;
 
     @OneToMany
-    private List<Streaming> streamingAssinados;
+    private List<Streaming> streamings;
 
     @OneToMany
-    private List<Gasto> gastosUsuario;
+    private List<Gasto> gastos;
 
     public Usuario() {
     }
@@ -61,19 +60,19 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public List<Streaming> getStreamingAssinados() {
-        return streamingAssinados;
+    public List<Streaming> getStreaming() {
+        return this.streamings;
     }
 
     public void setStreamingAssinados(List<Streaming> streamingAssinados) {
-        this.streamingAssinados = streamingAssinados;
+        this.streamings = streamingAssinados;
     }
 
-    public List<Gasto> getGastosUsuario() {
-        return gastosUsuario;
+    public List<Gasto> getGastos() {
+        return gastos;
     }
 
-    public void setGastosUsuario(List<Gasto> gastosUsuario) {
-        this.gastosUsuario = gastosUsuario;
+    public void setGastos(List<Gasto> gastos) {
+        this.gastos = gastos;
     }
 }

@@ -96,34 +96,36 @@ export class AssinaturasComponent implements OnInit {
           return item.streaming;
         })
         this.filmesSeriesEncontrados = valorRetornado;
+        console.log(this.filmesSeriesEncontrados);
       })
     }
   }
 
-  addTitle(title: string, type: string, titleSubs: string) {
-    let id: any = null;
+  addTitle(idFilmeOuSerie: number, title: string, type: string, titleSubs: string) {
+    let idSubscription: any = null;
+
     this.allSubscriptions.forEach(subs => {
       const name = subs.nome.toLowerCase().trim().replace(/\s/g, "");
       if (name.includes(titleSubs)) {
-        id = subs.id;
+        idSubscription = subs.id;
       }
     })
-    if (id) {
+
+    if (idSubscription) {
       let data: Streaming;
       const serieOrMovie: SerieOuFilme = {};
 
-      this.subscriptionService.getStreaming(id)
+      this.subscriptionService.getStreaming(idSubscription)
         .subscribe(item => {
           data = item;
 
+          data.ativado = true;
+          serieOrMovie.id = idFilmeOuSerie;
           serieOrMovie.nome = title;
           serieOrMovie.assistindo = true;
-          if (type === 'series') {
-            data.series?.unshift(serieOrMovie);
-          } else {
-            data.filmes?.unshift(serieOrMovie);
-          }
-          this.subscriptionService.updateAssinatura(id, data).subscribe(() => {
+          serieOrMovie.filmeOuSerie = type;
+
+          this.subscriptionService.updateFilmeOuSerie(idSubscription, serieOrMovie).subscribe(() => {
             console.log('Success');
           });
         });
