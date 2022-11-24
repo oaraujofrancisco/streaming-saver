@@ -9,13 +9,13 @@ import { Gasto } from '../interfaces/gasto';
 })
 export class GastoService {
 
-  private readonly urlApi = "api";
+  private readonly urlApi = "api/gastos";
 
   constructor( private http: HttpClient ) { }
 
   getGasto(id: number): Observable<Gasto> {
 
-    return this.http.get<Gasto>(`${this.urlApi}/gastos/${id}`);
+    return this.http.get<Gasto>(`${this.urlApi}/${id}`);
   }
 
   getGastos(usuarioId: string): Observable<Gasto[]> {
@@ -24,19 +24,18 @@ export class GastoService {
       'usuario-id': usuarioId
     }
 
-    return this.http.get<Gasto[]>(`${this.urlApi}/gastos`, {params});
+    return this.http.get<Gasto[]>(`${this.urlApi}`, {params});
   }
 
   createGasto(data: Gasto) {
-
-    return this.http.post(`${this.urlApi}/gastos`, data);
+    return this.http.post(`${this.urlApi}`, data);
   }
 
   deleteGasto(id: number) {
-    return this.http.delete(`${this.urlApi}/gastos/${id}`);
+    return this.http.delete(`${this.urlApi}/${id}`);
   }
 
   updateGasto(id: number, data: Gasto) {
-    return this.http.put(`${this.urlApi}/gastos/${id}`, data);
+    return this.http.put(`${this.urlApi}/${id}`, data);
   }
 }

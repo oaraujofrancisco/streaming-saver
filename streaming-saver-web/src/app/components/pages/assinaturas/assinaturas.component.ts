@@ -44,10 +44,10 @@ export class AssinaturasComponent implements OnInit {
     }
 
     this.searchForm = this.formBuilder.group({
-      nome: ['', [
+      name: ['', [
         Validators.required,
       ]],
-      filmeOuSerie: ['', [
+      type: ['', [
         Validators.required,
       ]]
     })
@@ -62,13 +62,16 @@ export class AssinaturasComponent implements OnInit {
   applyFilter() {
     const option = this.filterModel;
 
-    if (option === 'Todas') {
-      this.subscriptions = this.allSubscriptions;
-    } else {
-      this.subscriptions = this.allSubscriptions.filter(subscription => {
-        return subscription.ativado!.includes(option);
-      });
+    this.subscriptions = this.allSubscriptions;
+
+    if (option === 'Ativa') {
+      this.subscriptions = this.allSubscriptions.filter(subscription => subscription.ativado);
     }
+
+    if (option === 'Inativa') {
+      this.subscriptions = this.allSubscriptions.filter(subscription => !subscription.ativado);
+    }
+
   }
 
   toGasto() {
@@ -80,9 +83,9 @@ export class AssinaturasComponent implements OnInit {
 
     if(this.searchForm.valid) {
       const name = this.searchForm.value?.name;
-      const filmeOuSerie = this.searchForm.value?.filmeOuSerie;
+      const type = this.searchForm.value?.type;
 
-      this.apiExternaService.getFilme(name, filmeOuSerie).subscribe((valorRetornado: any) => {
+      this.apiExternaService.getFilme(name, type).subscribe((valorRetornado: any) => {
         valorRetornado.result.forEach( (item: any) => {
           const availability: any = item.streamingInfo.br;
           if (availability) {
@@ -93,37 +96,36 @@ export class AssinaturasComponent implements OnInit {
           return item.streaming;
         })
         this.filmesSeriesEncontrados = valorRetornado;
+        console.log(this.filmesSeriesEncontrados);
       })
     }
   }
 
-  addTitle(title: string, type: string, titleSubs: string) {
-    let id: any = null;
+  addTitle(idFilmeOuSerie: number, title: string, type: string, titleSubs: string) {
+    let idSubscription: any = null;
+
     this.allSubscriptions.forEach(subs => {
       const name = subs.nome.toLowerCase().trim().replace(/\s/g, "");
       if (name.includes(titleSubs)) {
-        id = subs.id;
+        idSubscription = subs.id;
       }
     })
-    if (id) {
+
+    if (idSubscription) {
       let data: Streaming;
       const serieOrMovie: SerieOuFilme = {};
 
-      this.subscriptionService.getStreaming(id)
+      this.subscriptionService.getStreaming(idSubscription)
         .subscribe(item => {
-          const date = new Date().toLocaleDateString('pt-BR');
           data = item;
-          data.ultimoAcesso = date;
-          data.ultimaAtualizacao = date;
 
+          data.ativado = true;
+          serieOrMovie.id = idFilmeOuSerie;
           serieOrMovie.nome = title;
           serieOrMovie.assistindo = true;
-          if (type === 'series') {
-            data.series?.unshift(serieOrMovie);
-          } else {
-            data.filmes?.unshift(serieOrMovie);
-          }
-          this.subscriptionService.updateAssinatura(id, data).subscribe(() => {
+          serieOrMovie.filmeOuSerie = type;
+
+          this.subscriptionService.updateFilmeOuSerie(idSubscription, serieOrMovie).subscribe(() => {
             console.log('Success');
           });
         });

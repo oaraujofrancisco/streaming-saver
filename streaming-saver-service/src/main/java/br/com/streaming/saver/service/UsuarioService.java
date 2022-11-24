@@ -23,11 +23,14 @@ public class UsuarioService {
         return usuarioEncontrado.stream().anyMatch(usuario -> Objects.equals(usuario.getEmail(), email));
     }
 
+    public Usuario buscarPorId(Long id) {
+        return this.usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+    }
 
     public Usuario salvarUsuario(Usuario usuarioParaSalvar) {
 
-        if(this.buscarUsuarioPorEmail(usuarioParaSalvar.getEmail())) {
-           throw new RuntimeException("Email já cadastrado");
+        if (this.buscarUsuarioPorEmail(usuarioParaSalvar.getEmail())) {
+            throw new RuntimeException("Email já cadastrado");
         }
 
         usuarioParaSalvar.setId(null);
@@ -39,7 +42,7 @@ public class UsuarioService {
 
     public Usuario validarUsuario(String email, String senha) {
 
-        if(this.buscarUsuarioPorEmail(email)) {
+        if (this.buscarUsuarioPorEmail(email)) {
             return usuarioRepository.findByEmailAndSenha(email, senha);
         }
 

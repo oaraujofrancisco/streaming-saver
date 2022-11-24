@@ -75,13 +75,9 @@ export class GastosComponent implements OnInit {
     this.gastoService.getGastos(this.usuarioId).subscribe(gastos => {
       allGastos = gastos;
 
-      this.subsService.getStreamings(this.usuarioId).subscribe(subs => {
-        allGastos.push.apply(allGastos, subs);
-
-        this.allSpending = allGastos;
-        this.spending = allGastos;
-        this.calcTotal();
-      })
+      this.allSpending = allGastos;
+      this.spending = allGastos;
+      this.calcTotal();
     })
   }
 

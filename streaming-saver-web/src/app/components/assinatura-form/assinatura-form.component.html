@@ -17,16 +17,16 @@
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select formControlName="ativado">
-          <mat-option value="Ativa">Ativa</mat-option>
-          <mat-option value="Inativa">Inativa</mat-option>
+          <mat-option [value]="true">Ativa</mat-option>
+          <mat-option [value]="false">Inativa</mat-option>
         </mat-select>
         <mat-hint align="end">Status da assinatura</mat-hint>
       </mat-form-field>
 
       <mat-form-field hintLabel="Max 12 caracteres" appearance="fill">
         <mat-label>Nome</mat-label>
-        <input matInput #input maxlength="12" placeholder="Ex. Light, Netflix"
-        formControlName="name">
+        <input matInput #input maxlength="30" placeholder="Ex. Light, Netflix"
+        formControlName="nome">
         <mat-hint align="end"></mat-hint>
       </mat-form-field>
 

@@ -5,14 +5,14 @@
 
       <mat-form-field class="input-search" hintLabel="Digite o nome do Filme ou Serie" appearance="fill">
         <mat-label>Nome</mat-label>
-        <input matInput #input maxlength="12" placeholder="Ex. Batman, Superman"
-               formControlName="nome">
+        <input matInput #input maxlength="20" placeholder="Ex. Batman, Superman"
+               formControlName="name">
         <mat-hint align="end"></mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="gasto">
         <mat-label>Tipo</mat-label>
-        <mat-select formControlName="filmeOuSerie">
+        <mat-select formControlName="type">
           <mat-option value="movie">Filme</mat-option>
           <mat-option value="series">Serie</mat-option>
         </mat-select>
@@ -42,7 +42,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-icon-button color="primary" (click)="addTitle(filmeSerieEncontrado.title,filmeSerieEncontrado.type, titleSubs)">
+            <button mat-icon-button color="primary" (click)="addTitle(filmeSerieEncontrado.tmdbId, filmeSerieEncontrado.title,filmeSerieEncontrado.type, titleSubs)">
               <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -68,21 +68,21 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.nome }} </td>
       </ng-container>
 
       <!-- Last Access Column -->
       <ng-container matColumnDef="last_access">
         <th mat-header-cell *matHeaderCellDef> Ultimo Acesso </th>
-        <td mat-cell *matCellDef="let element"> {{ element.lastAccess }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.ultimoAcesso }} </td>
       </ng-container>
 
       <!-- Watching Column -->
       <ng-container matColumnDef="watching">
         <th mat-header-cell *matHeaderCellDef> Assistindo </th>
         <td mat-cell *matCellDef="let element">
-          <span *ngIf="element.movies[0]; else series">{{ element.movies[0].title }}</span>
-          <ng-template #series><span *ngIf="element.series[0]; else noContent">{{ element.series[0].title }}</span></ng-template>
+          <span *ngIf="element.filmes[0]; else series">{{ element.filmes[0].nome }}</span>
+          <ng-template #series><span *ngIf="element.series[0]; else noContent">{{ element.series[0].nome }}</span></ng-template>
           <ng-template #noContent>Nenhum</ng-template>
         </td>
       </ng-container>
@@ -90,7 +90,10 @@
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> {{ element.ativo }} </td>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.ativado; else naoAtivado"> Ativo</span>
+          <ng-template #naoAtivado> Não Ativo</ng-template>
+        </td>
       </ng-container>
 
       <!-- Actions Column -->
