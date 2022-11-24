@@ -14,6 +14,7 @@ export class GastoFormComponent implements OnInit {
   @Input() matTitle!: string;
   @Input() gastoData: Gasto | null = null;
 
+  gasto!: string;
   gastoForm!: FormGroup;
   subscription!: string;
   categories: string[] =
