@@ -5,7 +5,7 @@
 
       <mat-form-field class="input-search" hintLabel="Digite o nome do Filme ou Serie" appearance="fill">
         <mat-label>Nome</mat-label>
-        <input matInput #input maxlength="12" placeholder="Ex. Batman, Superman"
+        <input matInput #input maxlength="20" placeholder="Ex. Batman, Superman"
                formControlName="name">
         <mat-hint align="end"></mat-hint>
       </mat-form-field>
@@ -42,7 +42,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-icon-button color="primary" (click)="addTitle(filmeSerieEncontrado.title,filmeSerieEncontrado.type, titleSubs)">
+            <button mat-icon-button color="primary" (click)="addTitle(filmeSerieEncontrado.tmdbId, filmeSerieEncontrado.title,filmeSerieEncontrado.type, titleSubs)">
               <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -81,8 +81,8 @@
       <ng-container matColumnDef="watching">
         <th mat-header-cell *matHeaderCellDef> Assistindo </th>
         <td mat-cell *matCellDef="let element">
-          <span *ngIf="element.filmes[0]; else series">{{ element.filmes[0].title }}</span>
-          <ng-template #series><span *ngIf="element.series[0]; else noContent">{{ element.series[0].title }}</span></ng-template>
+          <span *ngIf="element.filmes[0]; else series">{{ element.filmes[0].nome }}</span>
+          <ng-template #series><span *ngIf="element.series[0]; else noContent">{{ element.series[0].nome }}</span></ng-template>
           <ng-template #noContent>Nenhum</ng-template>
         </td>
       </ng-container>

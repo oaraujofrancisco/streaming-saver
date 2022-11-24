@@ -1,16 +1,18 @@
 package br.com.streaming.saver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "tb_filme")
 public class Filme implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -18,6 +20,14 @@ public class Filme implements Serializable {
     private Boolean assistindo;
 
     private Long quantidadeAssistido;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "filme_streaming",
+            joinColumns = @JoinColumn(name = "filme"),
+            inverseJoinColumns = @JoinColumn(name = "streaming"))
+    private List<Streaming> streamings = new ArrayList<>();
 
     public Filme() {
     }
@@ -52,5 +62,13 @@ public class Filme implements Serializable {
 
     public void setQuantidadeAssistido(Long quantidadeAssistido) {
         this.quantidadeAssistido = quantidadeAssistido;
+    }
+
+    public List<Streaming> getStreamings() {
+        return streamings;
+    }
+
+    public void setStreamings(List<Streaming> streamingsDisponiveis) {
+        this.streamings = streamingsDisponiveis;
     }
 }

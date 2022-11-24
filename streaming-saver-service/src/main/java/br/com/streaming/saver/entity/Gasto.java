@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_gasto")
 public class Gasto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,7 +28,7 @@ public class Gasto implements Serializable {
 
     private String tipo;
 
-    @OneToOne
+    @ManyToOne
     private Usuario usuario;
 
     public Gasto() {
@@ -114,5 +113,6 @@ public class Gasto implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
 
 }

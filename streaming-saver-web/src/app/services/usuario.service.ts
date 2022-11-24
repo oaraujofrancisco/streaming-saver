@@ -8,9 +8,14 @@ import {Usuario} from "../interfaces/usuario";
 })
 export class UsuarioService {
 
-  private readonly urlApi = "api";
+  private readonly urlApi = "api/usuario";
 
   constructor( private http: HttpClient ) { }
+
+  getUserById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.urlApi}/${id}`);
+  }
+
 
   getUser(usuarioLogin: Usuario): Observable<Usuario> {
 
@@ -19,7 +24,7 @@ export class UsuarioService {
       senha: usuarioLogin.senha
     }
 
-    return this.http.get<Usuario>(`${this.urlApi}/usuario`, {params});
+    return this.http.get<Usuario>(`${this.urlApi}`, {params});
   }
 
   createUser(usuarioLogin: Usuario): Observable<Usuario> {
@@ -29,6 +34,6 @@ export class UsuarioService {
       senha: usuarioLogin.senha
     }
 
-    return this.http.post<Usuario>(`${this.urlApi}/usuario`, usuarioSalvar);
+    return this.http.post<Usuario>(`${this.urlApi}`, usuarioSalvar);
   }
 }
